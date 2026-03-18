@@ -1,0 +1,47 @@
+{
+  "name": "theloungebooth-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build && tsc --noEmit",
+    "preview": "vite preview",
+    "studio": "sanity dev"
+  },
+  "dependencies": {
+    "@portabletext/react": "^6.0.3",
+    "@sanity/client": "^7.17.0",
+    "@sanity/orderable-document-list": "^1.5.1",
+    "@tanstack/react-query": "^5.90.21",
+    "@tanstack/react-router": "^1.167.2",
+    "@tanstack/react-router-devtools": "^1.166.9",
+    "@tanstack/react-router-ssr-query": "^1.166.9",
+    "@tanstack/react-start": "^1.166.13",
+    "@vitejs/plugin-react": "^5.2.0",
+    "motion": "^12.36.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "resend": "^6.9.3",
+    "sanity-plugin-media": "^4.1.1",
+    "styled-components": "^6.3.11",
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.3.6"
+  },
+  "overrides": {
+    "yallist": "^4.0.0",
+    "unicorn-magic": "^0.4.0"
+  },
+  "devDependencies": {
+    "@sanity/types": "^5.16.0",
+    "@sanity/vision": "^5.16.0",
+    "@tailwindcss/vite": "^4.2.1",
+    "@tanstack/react-query-devtools": "^5.91.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "sanity": "^5.16.0",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.9.3",
+    "vite-plugin-svgr": "^4.5.0",
+    "vite-tsconfig-paths": "^6.1.1"
+  }
+}

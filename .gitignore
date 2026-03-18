@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+.output/
+.vinxi/
+dist/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.claude/
+
+# TanStack router generated file
+app/routeTree.gen.ts
+
+# TanStack temp
+.tanstack/
+
+# Sanity generated runtime
+.sanity/
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite
+app.config.timestamp_*.js
+vite.config.ts.timestamp-*
+
+# Logs
+*.log

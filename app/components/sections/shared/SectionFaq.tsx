@@ -17,11 +17,11 @@ function AccordionItem({ question, answer }: FaqItem) {
     <div className="border-b border-primary-muted/20 group-last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between py-5 text-left gap-6 cursor-pointer"
+        className="w-full flex items-center justify-between py-4 md:py-5 text-left gap-6 cursor-pointer"
         aria-expanded={isOpen}
       >
-        <span className="type-base-plus text-primary">{question}</span>
-        <span className="shrink-0 size-5 text-primary" aria-hidden>
+        <span className="type-base md:type-base-plus text-primary">{question}</span>
+        <span className="shrink-0 size-4.5 md:size-5 text-primary" aria-hidden>
           {isOpen ? <RemoveIcon /> : <AddIcon />}
         </span>
       </button>

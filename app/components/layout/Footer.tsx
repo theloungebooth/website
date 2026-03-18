@@ -62,7 +62,7 @@ export function Footer({
 
       <div className="p-5 pb-10 sm:p-8 max-w-355 mx-auto flex text-primary-muted flex-row gap-x-6 justify-between items-start">
         {/* Left: copyright + legal links */}
-        <div className="flex flex-wrap justify-between w-full sm:w-auto flex-col md:flex-row md:w-auto md:justify-start items-center md:items-start gap-y-1">
+        <div className="flex flex-wrap justify-between w-full flex-col md:flex-row md:w-auto md:justify-start items-center md:items-start gap-y-1">
           <p className="type-base-minus pr-4 ">© {new Date().getFullYear()} The Lounge Booth</p>
           <div className="flex gap-x-1.5">
             {settings?.footerNavLegal?.map((link, index) => (

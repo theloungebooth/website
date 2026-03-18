@@ -23,7 +23,7 @@ export function SectionHeroAbout({ heading, subheading, item, primaryLink, ancho
         </FadeIn>
         <FadeIn
           direction="up"
-          className="-left-5 -right-5 w-[calc(100%+2.5rem)] md:left-auto md:right-auto md:w-full relative mt-8 md:mt-12 aspect-5/4 md:aspect-video overflow-hidden md:rounded-custom bg-surface"
+          className="relative mt-8 md:mt-12 aspect-5/4 md:aspect-video overflow-hidden rounded-custom bg-surface"
         >
           {item && <MediaItem item={item} sizes="100vw" widths={[800, 1200, 1600, 2400]} loading="eager" />}
         </FadeIn>

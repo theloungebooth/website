@@ -56,7 +56,7 @@ export const sectionHeroContact = {
               name: 'videoUrl',
               title: 'Video',
               type: 'file',
-              options: { accept: 'video/mp4,video/webm,video/quicktime' },
+              options: { accept: 'video/*' },
               hidden: ({ parent }: any) => parent?.mediaType !== 'video',
             },
             {

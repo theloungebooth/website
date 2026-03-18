@@ -6,6 +6,7 @@ import { publicSanityClient } from "@sanity/lib/client"
 import { pageBySlugQuery } from "@sanity/lib/queries"
 import type { PageData } from "~/types/sanity"
 import { SectionRenderer } from "~/components/sections/SectionRenderer"
+import { NotFound } from "~/components/NotFound"
 import { seo } from "~/utils/seo"
 import { withFilename } from "~/lib/imgUrl"
 import { deepSmartify } from "~/utils/smartQuotes"
@@ -48,11 +49,7 @@ export const Route = createFileRoute("/_layout/$slug")({
       links: [{ rel: "canonical", href: url }],
     }
   },
-  notFoundComponent: () => (
-    <div className="flex min-h-screen items-center justify-center">
-      <p className="type-base text-primary">Page not found.</p>
-    </div>
-  ),
+  notFoundComponent: () => <NotFound />,
   component: SlugPage,
 })
 

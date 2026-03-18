@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import type { SectionSocialHomepage } from "~/types/sanity"
+import { cn } from "~/lib/cn"
 import { MediaItem } from "~/components/ui/MediaItem"
 import { FadeIn, FadeInGroup } from "~/components/ui/FadeIn"
 import { FadeInScatter } from "~/components/ui/FadeInScatter"
@@ -14,13 +15,13 @@ const POSITIONS = [
   { top: "11.4%", left: "89.1%", phase: -0.4, duration: 9.4 },
   { top: "84.6%", left: "74.5%", phase: -1.1, duration: 10.6 },
   { top: "14.3%", left: "0.4%", phase: -0.7, duration: 9.1 },
-  { top: "10.1%", left: "20.9%", phase: -1.6, duration: 10.3 },
-  { top: "20%", left: "68.6%", phase: -0.7, duration: 11 },
+  { top: "10.1%", left: "20.9%", phase: -1.6, duration: 10.3, mobileHidden: true },
+  { top: "20%", left: "68.6%", phase: -0.7, duration: 11, mobileHidden: true },
   { top: "42.3%", left: "5.6%", phase: -1.3, duration: 10.8 },
   { top: "40.7%", left: "87.1%", phase: -0.9, duration: 9.2 },
   { top: "66.6%", left: "0%", phase: -1.8, duration: 10.1 },
   { top: "82.7%", left: "22.6%", phase: -0.5, duration: 9.6 },
-  { top: "74.3%", left: "48%", phase: -1.4, duration: 10.4 },
+  { top: "74.3%", left: "48%", phase: -1.4, duration: 10.4, mobileHidden: true },
   { top: "66.6%", left: "93.7%", phase: -0.8, duration: 9.9 },
 ]
 
@@ -59,6 +60,21 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
           90%  { transform: translate(14.7px, -20.2px) }
           100% { transform: translate(0px, -25px) }
         }
+        @media (max-width: 767px) {
+          @keyframes social-orbit {
+            0%   { transform: translate(0px, -12px) }
+            10%  { transform: translate(-7px, -9.7px) }
+            20%  { transform: translate(-11.4px, -3.7px) }
+            30%  { transform: translate(-11.4px, 3.7px) }
+            40%  { transform: translate(-7px, 9.7px) }
+            50%  { transform: translate(0px, 12px) }
+            60%  { transform: translate(7px, 9.7px) }
+            70%  { transform: translate(11.4px, 3.7px) }
+            80%  { transform: translate(11.4px, -3.7px) }
+            90%  { transform: translate(7px, -9.7px) }
+            100% { transform: translate(0px, -12px) }
+          }
+        }
         @keyframes social-pop {
           0%   { transform: scale(1)    }
           35%  { transform: scale(1.35) }
@@ -79,7 +95,7 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
               // Isolated from the scatter motion.div so the two transforms don't conflict.
               <div
                 key={i}
-                className="absolute w-16 sm:w-20 lg:w-32 aspect-square"
+                className={cn("absolute w-20 lg:w-32 aspect-square", pos.mobileHidden && "hidden md:block")}
                 style={{
                   top: pos.top,
                   left: pos.left,
@@ -88,7 +104,7 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
                 }}
               >
                 <div
-                  className="w-full h-full rounded-custom overflow-hidden cursor-pointer pointer-events-auto select-none"
+                  className="w-full h-full rounded-3xl md:rounded-custom overflow-hidden cursor-pointer pointer-events-auto select-none"
                   style={poppingIndex === i ? { animation: "social-pop 0.45s ease-out" } : undefined}
                   onClick={() => setPoppingIndex(i)}
                   onAnimationEnd={() => setPoppingIndex(null)}
@@ -117,28 +133,26 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
       </div>
 
       {/* Centered stats */}
-      <div className="relative z-10 flex flex-col items-center text-center px-8 gap-y-8">
-        <FadeInGroup stagger={0.25}>
-          {heading && (
-            <FadeIn direction="up">
-              <h2 className="type-lg font-medium text-primary pb-8">{heading}</h2>
-            </FadeIn>
-          )}
+      <FadeInGroup className="relative z-10 text-center" stagger={0.25}>
+        {heading && (
+          <FadeIn direction="up">
+            <h2 className="type-md md:type-lg font-medium text-primary pb-6 md:pb-8">{heading}</h2>
+          </FadeIn>
+        )}
 
-          {stats && stats.length > 0 && (
-            <div className="flex gap-x-16 gap-y-10 items-center justify-center">
-              {stats.map((stat) => (
-                <FadeIn direction="up" key={stat._key}>
-                  <div className="flex flex-col items-center">
-                    <p className="type-4xl text-primary">{stat.value}</p>
-                    <p className="type-base-plus">{stat.label}</p>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          )}
-        </FadeInGroup>
-      </div>
+        {stats && stats?.length > 0 && (
+          <div className="flex gap-x-16 gap-y-8 md:gap-y-10 flex-col md:flex-row items-center justify-center">
+            {stats.map((stat) => (
+              <FadeIn direction="up" key={stat._key}>
+                <div className="flex flex-col items-center">
+                  <p className="type-4xl text-primary">{stat.value}</p>
+                  <p className="type-base md:type-base-plus">{stat.label}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        )}
+      </FadeInGroup>
     </section>
   )
 }

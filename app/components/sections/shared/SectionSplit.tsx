@@ -9,7 +9,7 @@ export function SectionSplit({ heading, body, media, layout, anchorId }: Section
   const mediaRight = layout !== "text-right"
 
   const textCol = (
-    <FadeIn direction="up" className="order-0 lg:order-0">
+    <FadeIn direction="up" className="order-1 lg:order-unset">
       <div className="max-w-xl">
         {heading && <h2 className="type-2xl text-balance pb-5">{heading}</h2>}
         {body && (

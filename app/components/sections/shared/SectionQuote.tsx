@@ -4,11 +4,11 @@ import { FadeIn } from "~/components/ui/FadeIn"
 
 export function SectionQuote({ quote, authorName, authorTitle, anchorId }: SectionQuote) {
   return (
-    <Section id={anchorId ?? undefined} className="pt-48">
+    <Section id={anchorId ?? undefined} className="pt-28 md:pt-48">
       <FadeIn direction="up">
         <figure className="flex w-full flex-col items-center gap-y-6">
-          <blockquote className="relative flex flex-col items-center text-center max-w-290 pt-28">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 text-[12rem] font-sans leading-none font-bold text-primary">
+          <blockquote className="relative flex flex-col items-center text-center max-w-290 pt-24 md:pt-28">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 text-[10rem] md:text-[12rem] font-sans leading-none font-bold text-primary">
               {"\u201C"}
             </div>
             <p className="type-xl text-balance leading-normal">{quote}</p>

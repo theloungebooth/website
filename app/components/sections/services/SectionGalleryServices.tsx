@@ -34,7 +34,7 @@ export function SectionGalleryServices({ heading, items, anchorId }: SectionGall
   const endX = -(totalSingleWidth * 0.5)
 
   return (
-    <section id={anchorId ?? undefined} className="overflow-hidden py-30">
+    <section id={anchorId ?? undefined} className="overflow-hidden py-22 md:py-30">
       {heading && (
         <Section className="pb-10 lg:pb-14">
           <FadeIn direction="up" className="text-left">

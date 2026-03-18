@@ -4,6 +4,7 @@ import tsConfigPaths from 'vite-tsconfig-paths'
 import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import svgr from 'vite-plugin-svgr'
+import { nitro } from 'nitro/vite'
 
 export default defineConfig({
   ssr: {
@@ -20,6 +21,7 @@ export default defineConfig({
       // and app/routeTree.gen.ts automatically.
       srcDirectory: 'app',
     }),
+    nitro(),
     viteReact(),
     svgr(),
   ],

@@ -232,10 +232,9 @@ export const settingsQuery = /* groq */ `
     },
     "headerNav": headerNav[] { ${LINK_FIELDS} },
     "headerCta": headerCta { ${LINK_FIELDS} },
-    "mobileNav": mobileNav[] { ${LINK_FIELDS} },
-    "footerNavSite": footerNavSite[] { ${LINK_FIELDS} },
-    "footerNavLegal": footerNavLegal[] { ${LINK_FIELDS} },
-    "footerNavSocial": footerNavSocial[] { ${LINK_FIELDS} },
+    "secondaryNav": secondaryNav[] { ${LINK_FIELDS} },
+    "legalLinks": legalLinks[] { ${LINK_FIELDS} },
+    "socialLinks": socialLinks[] { ${LINK_FIELDS} },
   }
 `
 

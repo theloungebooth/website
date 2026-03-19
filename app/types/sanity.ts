@@ -364,8 +364,7 @@ export type SettingsData = {
   } | null
   headerNav?: SanityLink[] | null
   headerCta?: SanityLink | null
-  mobileNav?: SanityLink[] | null
-  footerNavSite?: SanityLink[] | null
-  footerNavLegal?: SanityLink[] | null
-  footerNavSocial: SanityLink[]
+  secondaryNav?: SanityLink[] | null
+  legalLinks?: SanityLink[] | null
+  socialLinks: SanityLink[]
 }

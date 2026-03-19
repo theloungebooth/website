@@ -55,7 +55,7 @@ export function MobileMenu({ settings }: { settings: SettingsData | null }) {
           exit="exit"
         >
           <nav className="flex flex-col gap-y-3 pt-32" aria-label="Mobile navigation">
-            {(settings?.mobileNav?.length ? settings.mobileNav : settings?.headerNav)?.map((link) => (
+            {(settings?.secondaryNav?.length ? settings.secondaryNav : settings?.headerNav)?.map((link) => (
               <motion.div key={link.label} variants={itemVariants}>
                 <SiteLink link={link} className="type-xl" onClick={() => setIsOpen(false)} />
               </motion.div>
@@ -63,7 +63,7 @@ export function MobileMenu({ settings }: { settings: SettingsData | null }) {
           </nav>
 
           <nav className="flex flex-col gap-y-2.5" aria-label="Mobile navigation">
-            {(settings?.footerNavSocial?.length ? settings.footerNavSocial : settings?.headerNav)?.map((link) => (
+            {(settings?.socialLinks?.length ? settings.socialLinks : settings?.headerNav)?.map((link) => (
               <motion.div key={link.label} variants={itemVariants}>
                 <SiteLink link={link} className="type-lg" onClick={() => setIsOpen(false)} />
               </motion.div>

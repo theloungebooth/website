@@ -46,10 +46,10 @@ export function Footer({
           )}
 
           <nav className="flex gap-x-2.5 items-center justify-center" aria-label="Social navigation">
-            {settings?.footerNavSocial?.map((link, index) => (
+            {settings?.socialLinks?.map((link, index) => (
               <Fragment key={link.label}>
                 <SiteLink link={link} className="type-nav text-link" />
-                {index < (settings?.footerNavSocial?.length || 0) - 1 && (
+                {index < (settings?.socialLinks?.length || 0) - 1 && (
                   <span className="text-xs" aria-hidden="true">
                     •
                   </span>
@@ -65,10 +65,10 @@ export function Footer({
         <div className="flex flex-wrap justify-between w-full flex-col md:flex-row md:w-auto md:justify-start items-center md:items-start gap-y-1">
           <p className="type-base-minus pr-4">© {new Date().getFullYear()} The Lounge Booth</p>
           <div className="flex gap-x-1 md:gap-x-1.5">
-            {settings?.footerNavLegal?.map((link, index) => (
+            {settings?.legalLinks?.map((link, index) => (
               <Fragment key={link.label}>
                 <SiteLink link={link} className="type-base-minus text-link" />
-                {(settings?.footerNavLegal?.length || 0) === 2 && index === 0 && (
+                {(settings?.legalLinks?.length || 0) === 2 && index === 0 && (
                   <span aria-hidden="true" className="type-base-minus">
                     &
                   </span>
@@ -81,7 +81,7 @@ export function Footer({
         {/* Right: site nav + contact */}
         {isMd && (
           <nav className="flex items-center justify-center gap-x-5 gap-y-1" aria-label="Footer navigation">
-            {settings?.footerNavSite?.map((link, index) => (
+            {settings?.secondaryNav?.map((link) => (
               <SiteLink key={link.label} link={link} className="type-base-minus text-link" />
             ))}
           </nav>

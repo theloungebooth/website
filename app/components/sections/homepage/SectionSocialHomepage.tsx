@@ -126,7 +126,7 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
                       nonInteractive
                     />
                   ) : (
-                    <div className="w-full h-full bg-surface" />
+                    <div className="w-full h-full bg-surface/65" />
                   )}
                 </div>
               </div>

@@ -7,7 +7,7 @@ import { FadeIn, FadeInGroup } from "~/components/ui/FadeIn"
 import { cn } from "~/lib/cn"
 
 const inputCls =
-  "w-full border border-surface bg-surface rounded-lg md:rounded-xl px-3.5 py-2.5 md:px-4 md:py-3 text-primary placeholder:color-primary-muted focus:outline-none focus:border-primary-muted transition-colors ease-linear type-base"
+  "w-full border border-surface bg-surface rounded-lg md:rounded-xl px-3.5 py-2.5 md:px-4 md:py-3 text-primary placeholder:color-primary-muted focus:outline-none focus:border-primary-muted transition-all ease-linear type-base"
 
 function FormFieldInput({ field, value, onChange }: { field: FormField; value: string; onChange: (v: string) => void }) {
   const placeholder = field.placeholder ?? field.label
@@ -156,7 +156,7 @@ export function SectionContact({ heading, subheading, items, formFields, anchorI
         {/* Media: second in DOM, but pulled to left column on desktop */}
         <FadeIn direction="up" className="lg:order-first">
           {media && (
-            <div className="aspect-4/5 w-full bg-surface rounded-custom overflow-hidden">
+            <div className="aspect-4/5 w-full bg-surface/65 rounded-custom overflow-hidden">
               <MediaItem item={media} sizes="(max-width: 1024px) 90vw, 50vw" widths={[400, 640, 900, 1280]} loading="eager" />
             </div>
           )}

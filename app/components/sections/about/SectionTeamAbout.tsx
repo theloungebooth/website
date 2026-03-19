@@ -40,8 +40,8 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
 export function SectionTeamAbout({ heading, body, members, anchorId }: SectionTeamAbout) {
   return (
     <Section id={anchorId ?? undefined}>
-      <FadeIn direction="up" className="max-w-2xl text-center text-balance mx-auto pb-12">
-        {heading && <h2 className="type-2xl text-balance pb-5">{heading}</h2>}
+      <FadeIn direction="up" className="max-w-2xl text-center text-balance mx-auto pb-8 md:pb-12">
+        {heading && <h2 className="type-xl font-semibold md:type-2xl text-balance pb-3.5 md:pb-5">{heading}</h2>}
         {body && (
           <div className="color-primary-muted">
             <PortableTextRenderer value={body} />

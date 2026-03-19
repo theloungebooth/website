@@ -67,7 +67,7 @@ function StickyScrollLayout({
                 )}
               </FadeIn>
               <motion.div
-                className="aspect-4/5 w-full overflow-hidden rounded-custom bg-surface"
+                className="aspect-4/5 w-full overflow-hidden rounded-custom bg-surface/65"
                 initial={{ opacity: 0, x: 8 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ ...SPRING, delay: i * 0.32 }}
@@ -138,7 +138,7 @@ export function SectionServicesHomepage({ heading, services, anchorId }: Section
               )}
             </FadeIn>
             <motion.div
-              className="aspect-7/8 w-full overflow-hidden rounded-custom bg-surface"
+              className="aspect-7/8 w-full overflow-hidden rounded-custom bg-surface/65"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10% 0px" }}

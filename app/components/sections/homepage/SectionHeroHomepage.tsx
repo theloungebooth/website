@@ -32,7 +32,7 @@ export function SectionHeroHomepage({ heading, subheading, item, primaryLink, se
         <FadeIn direction="up">
           {item && (
             <div className="mx-auto overflow-hidden rounded-4xl max-w-lg">
-              <div className="aspect-9/16 w-full bg-surface rounded-custom">
+              <div className="aspect-9/16 w-full bg-surface/65 rounded-custom">
                 <MediaItem
                   item={item}
                   widths={[400, 800, 1200]}

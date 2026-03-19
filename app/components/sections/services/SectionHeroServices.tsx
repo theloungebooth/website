@@ -20,7 +20,7 @@ export function SectionHeroServices({ heading, subheading, item, primaryLink, an
           </div>
         </FadeIn>
         <FadeIn direction="up">
-          <div className="aspect-4/5 w-full overflow-hidden bg-surface rounded-custom">
+          <div className="aspect-4/5 w-full overflow-hidden bg-surface/65 rounded-custom">
             {item && (
               <MediaItem item={item} sizes="(max-width: 1024px) 90vw, 50vw" widths={[400, 640, 900, 1280]} loading="eager" />
             )}

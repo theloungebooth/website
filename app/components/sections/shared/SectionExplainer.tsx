@@ -20,7 +20,7 @@ function StepItem({ step, isMd, index }: { step: ExplainerStep; index: number; i
         <p className="type-base md:max-w-[90%]">{step.description}</p>
       </div>
       {hasMedia && (
-        <div className="aspect-4/5 w-full overflow-hidden rounded-custom bg-surface">
+        <div className="aspect-4/5 w-full overflow-hidden rounded-custom bg-surface/65">
           <MediaItem
             item={{
               mediaType: step.mediaType ?? "image",

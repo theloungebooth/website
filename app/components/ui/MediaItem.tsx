@@ -101,6 +101,7 @@ export function MediaItem({
         draggable={nonInteractive ? false : draggable}
         style={{
           objectPosition: hotspotObjectPosition(item.imageHotspot, item.imageCrop),
+          color: "transparent",
           ...(nonInteractive ? { pointerEvents: "none", userSelect: "none" } : {}),
         }}
       />

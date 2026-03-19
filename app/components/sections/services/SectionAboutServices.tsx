@@ -141,7 +141,7 @@ export function SectionAboutServices({ heading, items, anchorId }: SectionAboutS
                 animate={{ width: cardW, height: cardH }}
                 initial={false}
                 transition={transition}
-                className="relative self-start overflow-hidden bg-surface rounded-custom"
+                className="relative self-start overflow-hidden bg-surface/65 rounded-custom"
               >
                 <AnimatePresence>
                   <motion.div
@@ -162,7 +162,7 @@ export function SectionAboutServices({ heading, items, anchorId }: SectionAboutS
                         nonInteractive
                       />
                     ) : (
-                      <div className="h-full w-full bg-surface" />
+                      <div className="h-full w-full bg-surface/65" />
                     )}
                   </motion.div>
                 </AnimatePresence>

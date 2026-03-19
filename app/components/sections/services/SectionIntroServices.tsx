@@ -22,12 +22,12 @@ export function SectionIntroServices({ heading, items, body, anchorId }: Section
         {(itemA || itemB) && (
           <div className="w-full pt-10 lg:pt-14 grid grid-cols-12 gap-4 lg:gap-6 items-start">
             {itemA && (
-              <FadeIn direction="down" className="aspect-4/5 col-span-5 overflow-hidden rounded-custom bg-surface">
+              <FadeIn direction="down" className="aspect-4/5 col-span-5 overflow-hidden rounded-custom bg-surface/65">
                 <MediaItem item={itemA} sizes="(max-width: 1024px) 45vw, 30vw" widths={[400, 700, 900]} />
               </FadeIn>
             )}
             {itemB && (
-              <FadeIn direction="up" className="aspect-4/5 col-span-7 overflow-hidden rounded-custom bg-surface">
+              <FadeIn direction="up" className="aspect-4/5 col-span-7 overflow-hidden rounded-custom bg-surface/65">
                 <MediaItem item={itemB} sizes="(max-width: 1024px) 55vw, 40vw" widths={[500, 900, 1200]} />
               </FadeIn>
             )}

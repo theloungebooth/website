@@ -9,7 +9,10 @@ export const Section = forwardRef<HTMLElement, SectionProps>(({ className, child
   return (
     <section
       ref={ref}
-      className={cn("px-5 sm:px-8 mx-auto max-w-355 py-10 lg:py-20 last:pb-12 first:pt-12 first:md:pt-16", className)}
+      className={cn(
+        "px-5 sm:px-8 mx-auto max-w-355 pt-8 pb-6 sm:pt-12 sm:pb-10 md:pt-16 md:pb-14 xl:pt-20 xl:pb-18 last:pb-12 first:pt-12 first:md:pt-16",
+        className,
+      )}
       {...props}
     >
       {children}

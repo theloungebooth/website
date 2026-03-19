@@ -78,7 +78,7 @@ export function SectionGalleryServices({ heading, items, anchorId }: SectionGall
 
 function GalleryItem({ item, itemW }: { item: SectionGalleryItem; itemW: number }) {
   return (
-    <div className="shrink-0 overflow-hidden rounded-custom bg-surface aspect-9/16" style={{ width: `${itemW}px` }}>
+    <div className="shrink-0 overflow-hidden rounded-custom bg-surface/65 aspect-9/16" style={{ width: `${itemW}px` }}>
       <MediaItem item={item} sizes={`${itemW}px`} widths={[itemW, itemW * 2]} nonInteractive />
     </div>
   )

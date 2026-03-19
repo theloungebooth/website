@@ -40,6 +40,14 @@ export function MediaItem({
 }: MediaItemProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(true)
+  const [showButton, setShowButton] = useState(false)
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  function triggerButtonShow() {
+    if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current)
+    setShowButton(true)
+    hideTimeoutRef.current = setTimeout(() => setShowButton(false), 2000)
+  }
 
   function togglePlay() {
     const video = videoRef.current
@@ -51,11 +59,20 @@ export function MediaItem({
       video.pause()
       setIsPlaying(false)
     }
+    triggerButtonShow()
+  }
+
+  function handleContainerTouch(e: React.TouchEvent) {
+    e.preventDefault()
+    togglePlay()
   }
 
   if (item.mediaType === "video" && item.videoUrl) {
     return (
-      <div className={cn("relative h-full w-full group", nonInteractive && "pointer-events-none")}>
+      <div
+        className={cn("relative h-full w-full group", nonInteractive && "pointer-events-none")}
+        onTouchEnd={nonInteractive ? undefined : handleContainerTouch}
+      >
         <video
           ref={videoRef}
           src={withFilename(item.videoUrl, item.videoFilename)}
@@ -72,8 +89,12 @@ export function MediaItem({
         />
         {!nonInteractive && <button
           onClick={togglePlay}
+          onTouchEnd={(e) => e.stopPropagation()}
           aria-label={isPlaying ? "Pause" : "Play"}
-          className="absolute cursor-pointer flex bottom-6 left-6 h-12 w-12 items-center justify-center rounded-full bg-primary-muted/60 text-white opacity-0 group-hover:opacity-100 transition-all ease-linear hover:bg-primary-muted"
+          className={cn(
+            "absolute cursor-pointer flex bottom-6 left-6 h-12 w-12 items-center justify-center rounded-full bg-primary-muted/60 text-white transition-all ease-linear hover:bg-primary-muted",
+            showButton ? "opacity-100" : "opacity-0 group-hover:opacity-100",
+          )}
         >
           {isPlaying ? (
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-6 w-6 fill-current">

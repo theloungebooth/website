@@ -26,7 +26,7 @@ function buildXml(pages: SitemapPage[]) {
 
   const urls = [
     `<url>
-      <loc>${SITE_URL}/</loc>
+      <loc>${SITE_URL}</loc>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
     </url>`,

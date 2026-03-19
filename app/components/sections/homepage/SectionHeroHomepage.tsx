@@ -35,10 +35,10 @@ export function SectionHeroHomepage({ heading, subheading, item, primaryLink, se
               <div className="aspect-9/16 w-full bg-surface/65 rounded-custom">
                 <MediaItem
                   item={item}
+                  sizes="(max-width: 768px) 90vw, 512px"
                   widths={[400, 800, 1200]}
                   loading="eager"
                   fetchPriority="high"
-                  className="h-full w-[calc(100%+2px)] max-w-none object-cover -left-px -right-px"
                 />
               </div>
             </div>

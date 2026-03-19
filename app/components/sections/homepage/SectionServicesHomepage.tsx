@@ -60,7 +60,7 @@ function StickyScrollLayout({
           {items.map((service, i) => (
             <li key={`${service._key}-${i}`} data-card className="flex-none flex flex-col items-start" style={{ width: ITEM_W }}>
               <FadeIn direction="up" className="flex pb-3 items-center w-full justify-between gap-3">
-                <h3 className="type-lg leading-none text-primary font-medium">{service.heading}</h3>
+                <h3 className="type-md 3xl:text-lg leading-none text-primary font-medium">{service.heading}</h3>
                 {service.cta && (
                   <Button variant="outline" arrow href={service.cta.href} aria-label={service.cta.label}>
                     {service.cta.label}
@@ -75,7 +75,7 @@ function StickyScrollLayout({
               >
                 <MediaItem
                   item={service}
-                  sizes="(max-width: 1024px) 90vw, 40vw"
+                  sizes="25vw"
                   widths={[400, 800, 1200]}
                   className="h-full w-full max-w-none object-cover"
                   draggable={false}
@@ -134,7 +134,7 @@ export function SectionServicesHomepage({ heading, services, anchorId }: Section
           <li key={`${service._key}-${i}`} className="flex flex-col items-start">
             {isSm && (
               <FadeIn direction="up" className="flex pb-3 justify-center sm:items-baseline w-full sm:justify-between gap-3">
-                <h3 className="type-lg leading-none text-primary font-medium">{service.heading}</h3>
+                <h3 className="type-md xl:text-lg leading-none text-primary font-medium">{service.heading}</h3>
                 {service.cta && (
                   <Button variant="outline" arrow href={service.cta.href} aria-label={service.cta.label}>
                     {service.cta.label}
@@ -151,7 +151,7 @@ export function SectionServicesHomepage({ heading, services, anchorId }: Section
             >
               <MediaItem
                 item={service}
-                sizes="50vw"
+                sizes="(max-width: 768px) 90vw, 50vw"
                 widths={[400, 800, 1200]}
                 className="h-full w-full max-w-none object-cover"
                 draggable={false}

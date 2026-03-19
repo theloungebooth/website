@@ -19,7 +19,7 @@ export function SectionSplit({ heading, body, media, layout, invertOnMobile, anc
 
   const mediaCol = media ? (
     <FadeIn direction={mediaRight ? "left" : "right"} className="aspect-4/5 overflow-hidden rounded-custom bg-surface/65">
-      <MediaItem item={media} sizes="(max-width: 1024px) 100vw, 50vw" widths={[400, 640, 900, 1280]} />
+      <MediaItem item={media} sizes="(max-width: 768px) 90vw, 50vw" widths={[400, 640, 900, 1280]} />
     </FadeIn>
   ) : null
 

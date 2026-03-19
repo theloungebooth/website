@@ -365,6 +365,8 @@ export type SettingsData = {
     description?: string | null
     ogImageUrl?: string | null
     ogImageFilename?: string | null
+    ogImageWidth?: number | null
+    ogImageHeight?: number | null
   } | null
   headerNav?: SanityLink[] | null
   headerCta?: SanityLink | null

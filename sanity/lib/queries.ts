@@ -233,6 +233,8 @@ export const settingsQuery = /* groq */ `
       description,
       "ogImageUrl": ogImage.asset->url,
       "ogImageFilename": ogImage.asset->originalFilename,
+      "ogImageWidth": ogImage.asset->metadata.dimensions.width,
+      "ogImageHeight": ogImage.asset->metadata.dimensions.height,
     },
     "headerNav": headerNav[] { ${LINK_FIELDS} },
     "headerCta": headerCta { ${LINK_FIELDS} },

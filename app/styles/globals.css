@@ -47,6 +47,7 @@
   --leading-loose: 1.5;
 
   --breakpoint-xs: 480px;
+  --breakpoint-3xl: 1920px;
 
   --radius-custom: 28px;
 }

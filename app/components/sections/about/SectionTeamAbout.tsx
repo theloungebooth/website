@@ -19,8 +19,8 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
           imageHotspot: member.imageHotspot,
           alt: member.alt ?? member.name,
         }}
-        sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 20vw"
-        widths={[300, 600, 900]}
+        sizes="(max-width: 768px) 90vw, (max-width: 1280px) 48vw, 33vw"
+        widths={[300, 600, 900, 1200]}
       />
       <div
         className={cn(

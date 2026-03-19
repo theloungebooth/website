@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useRef, useEffect } from "react"
 import { motion, useMotionValue, useTransform, animate, useInView, useReducedMotion } from "motion/react"
 import type { SectionSocialHomepage } from "~/types/sanity"

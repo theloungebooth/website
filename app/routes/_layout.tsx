@@ -33,6 +33,8 @@ export const Route = createFileRoute("/_layout")({
       title: settings?.defaultSeo?.siteTitle ?? "The Lounge Booth",
       description: settings?.defaultSeo?.description ?? undefined,
       image: withFilename(settings?.defaultSeo?.ogImageUrl, settings?.defaultSeo?.ogImageFilename) || undefined,
+      imageWidth: settings?.defaultSeo?.ogImageWidth ?? undefined,
+      imageHeight: settings?.defaultSeo?.ogImageHeight ?? undefined,
     }),
   }),
   component: SiteLayout,

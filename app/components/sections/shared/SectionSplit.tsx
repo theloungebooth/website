@@ -9,7 +9,7 @@ export function SectionSplit({ heading, body, media, layout, anchorId }: Section
   const mediaRight = layout !== "text-right"
 
   const textCol = (
-    <FadeIn direction="up" className="order-1 lg:order-unset">
+    <FadeIn direction="up">
       <div className="max-w-xl">
         {heading && <h2 className="type-2xl text-balance pb-5">{heading}</h2>}
         {body && (
@@ -22,19 +22,16 @@ export function SectionSplit({ heading, body, media, layout, anchorId }: Section
   )
 
   const mediaCol = media ? (
-    <FadeIn
-      direction={mediaRight ? "left" : "right"}
-      className="aspect-4/5 overflow-hidden rounded-custom bg-surface order-1 lg:order-0"
-    >
+    <FadeIn direction={mediaRight ? "left" : "right"} className="aspect-4/5 overflow-hidden rounded-custom bg-surface">
       <MediaItem item={media} sizes="(max-width: 1024px) 100vw, 50vw" widths={[400, 640, 900, 1280]} />
     </FadeIn>
   ) : null
 
   return (
     <Section id={anchorId ?? undefined}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-        {mediaRight ? textCol : mediaCol}
-        {mediaRight ? mediaCol : textCol}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+        <div className={cn("order-1", !mediaRight && "md:order-2")}>{textCol}</div>
+        <div className={cn("order-2", !mediaRight && "md:order-1")}>{mediaCol}</div>
       </div>
     </Section>
   )

@@ -44,7 +44,10 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
   const [poppingIndex, setPoppingIndex] = useState<number | null>(null)
 
   return (
-    <section id={anchorId ?? undefined} className="relative min-h-screen flex items-center justify-center overflow-hidden py-24">
+    <section
+      id={anchorId ?? undefined}
+      className="relative min-h-175 md:min-h-screen flex items-center justify-center overflow-hidden py-18 md:py-24"
+    >
       {/* Smooth circular path sampled every 36° */}
       <style>{`
         @keyframes social-orbit {
@@ -87,7 +90,7 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
       {/* Floating images — absoluteWrappers fills each motion.div to container size so
           child top/left percentages resolve correctly despite the scatter transforms. */}
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-        <FadeInScatter absoluteWrappers scatterOffsets={scatterOffsets} className="relative w-full h-[80vh] max-w-355">
+        <FadeInScatter absoluteWrappers scatterOffsets={scatterOffsets} className="relative w-full h-175 md:h-[85vh] max-w-355">
           {POSITIONS.map((pos, i) => {
             const photo = uploadedPhotos[i]
             return (
@@ -95,7 +98,7 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
               // Isolated from the scatter motion.div so the two transforms don't conflict.
               <div
                 key={i}
-                className={cn("absolute w-20 lg:w-32 aspect-square", pos.mobileHidden && "hidden md:block")}
+                className={cn("absolute w-20 sm:w-24 md:w-26 xl:w-32 aspect-square", pos.mobileHidden && "hidden md:block")}
                 style={{
                   top: pos.top,
                   left: pos.left,
@@ -141,7 +144,7 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
         )}
 
         {stats && stats?.length > 0 && (
-          <div className="flex gap-x-16 gap-y-8 md:gap-y-10 flex-col md:flex-row items-center justify-center">
+          <div className="flex gap-x-12 lg:gap-x-16 gap-y-8 md:gap-y-10 flex-col md:flex-row items-center justify-center">
             {stats.map((stat) => (
               <FadeIn direction="up" key={stat._key}>
                 <div className="flex flex-col items-center">

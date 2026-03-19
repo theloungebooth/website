@@ -56,7 +56,7 @@ function SiteLayout() {
     email: "info@theloungebooth.com",
     description:
       settings?.defaultSeo?.description ?? "Premium photo booth hire for weddings, corporate events and social occasions.",
-    sameAs: settings?.footerNavSocial?.map((l) => l.href).filter(Boolean) ?? [],
+    sameAs: settings?.socialLinks?.map((l) => l.href).filter(Boolean) ?? [],
   }
 
   return (

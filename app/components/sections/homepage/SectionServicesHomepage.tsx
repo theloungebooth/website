@@ -5,6 +5,7 @@ import { Button } from "~/components/ui/Button"
 import { MediaItem } from "~/components/ui/MediaItem"
 import { FadeIn } from "~/components/ui/FadeIn"
 import { Section } from "~/components/ui/Section"
+import { useIsSm } from "~/hooks/useBreakpoint"
 
 const ITEM_W = "calc((100vw - 3rem) / 4)"
 const HALF_ITEM = "calc((100vw - 3rem) / 8)"
@@ -22,7 +23,7 @@ function StickyScrollLayout({
   anchorId?: string | null
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLUListElement>(null)
   const [maxScroll, setMaxScroll] = useState(0)
   const n = items.length
 
@@ -51,13 +52,13 @@ function StickyScrollLayout({
           </FadeIn>
         )}
 
-        <motion.div
+        <motion.ul
           ref={contentRef}
-          className="flex gap-6"
+          className="flex gap-6 list-none"
           style={{ x, width: "max-content", paddingLeft: HALF_ITEM, paddingRight: HALF_ITEM }}
         >
           {items.map((service, i) => (
-            <div key={`${service._key}-${i}`} data-card className="flex-none flex flex-col items-start" style={{ width: ITEM_W }}>
+            <li key={`${service._key}-${i}`} data-card className="flex-none flex flex-col items-start" style={{ width: ITEM_W }}>
               <FadeIn direction="up" className="flex pb-3 items-center w-full justify-between gap-3">
                 <h3 className="type-lg leading-none text-primary font-medium">{service.heading}</h3>
                 {service.cta && (
@@ -88,9 +89,9 @@ function StickyScrollLayout({
               >
                 {service.description && <p className="type-base max-w-[90%] color-primary-muted">{service.description}</p>}
               </motion.div>
-            </div>
+            </li>
           ))}
-        </motion.div>
+        </motion.ul>
       </section>
     </div>
   )
@@ -104,6 +105,8 @@ export function SectionServicesHomepage({ heading, services, anchorId }: Section
   const [useSticky, setUseSticky] = useState(isSticky)
 
   const items = services ?? []
+
+  const isSm = useIsSm()
 
   useLayoutEffect(() => {
     function onResize() {
@@ -122,21 +125,23 @@ export function SectionServicesHomepage({ heading, services, anchorId }: Section
     <Section id={anchorId ?? undefined}>
       {heading && (
         <FadeIn direction="up">
-          <h2 className="type-xl font-semibold md:type-2xl text-center text-balance pb-8 md:pb-10 lg:pb-16">{heading}</h2>
+          <h2 className="type-xl font-semibold md:type-2xl text-center text-balance pb-6 sm:pb-8 md:pb-10 lg:pb-16">{heading}</h2>
         </FadeIn>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 list-none">
         {items.map((service, i) => (
-          <div key={`${service._key}-${i}`} className="flex flex-col items-start">
-            <FadeIn direction="up" className="flex pb-3 items-baseline w-full justify-between gap-3">
-              <h3 className="type-lg leading-none text-primary font-medium">{service.heading}</h3>
-              {service.cta && (
-                <Button variant="outline" arrow href={service.cta.href} aria-label={service.cta.label}>
-                  {service.cta.label}
-                </Button>
-              )}
-            </FadeIn>
+          <li key={`${service._key}-${i}`} className="flex flex-col items-start">
+            {isSm && (
+              <FadeIn direction="up" className="flex pb-3 justify-center sm:items-baseline w-full sm:justify-between gap-3">
+                <h3 className="type-lg leading-none text-primary font-medium">{service.heading}</h3>
+                {service.cta && (
+                  <Button variant="outline" arrow href={service.cta.href} aria-label={service.cta.label}>
+                    {service.cta.label}
+                  </Button>
+                )}
+              </FadeIn>
+            )}
             <motion.div
               className="aspect-7/8 w-full overflow-hidden rounded-custom bg-surface/65"
               initial={{ opacity: 0, y: 12 }}
@@ -153,17 +158,23 @@ export function SectionServicesHomepage({ heading, services, anchorId }: Section
               />
             </motion.div>
             <motion.div
-              className="py-4 text-left"
+              className="py-6 flex flex-col gap-y-3"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{ ...SPRING, delay: (i % 2) * 0.16 + 0.14 }}
             >
+              {!isSm && <h3 className="type-lg leading-none text-primary font-medium">{service.heading}</h3>}
               {service.description && <p className="type-base color-primary-muted">{service.description}</p>}
+              {!isSm && service.cta && (
+                <Button variant="outline" arrow href={service.cta.href} aria-label={service.cta.label} className="">
+                  {isSm ? service.cta.label : "Learn more"}
+                </Button>
+              )}
             </motion.div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </Section>
   )
 }

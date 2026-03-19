@@ -38,15 +38,63 @@ export const Route = createFileRoute("/_layout/$slug")({
       const formatted = new Date(page._updatedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })
       description = description ? `${description} Last updated ${formatted}.` : `Last updated ${formatted}.`
     }
+
+    const faqItems = page?.sections
+      ?.filter((s) => s._type === "sectionFaq")
+      .flatMap((s) => ("items" in s ? (s.items ?? []) : []))
+
+    const faqSchema =
+      faqItems && faqItems.length > 0
+        ? {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqItems.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: item.answer,
+              },
+            })),
+          }
+        : null
+
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: page?.seo?.title ?? page?.title ?? "The Lounge Booth",
+          item: url,
+        },
+      ],
+    }
+
+    const scripts = [
+      { type: "application/ld+json", children: JSON.stringify(breadcrumbSchema) },
+      ...(faqSchema ? [{ type: "application/ld+json", children: JSON.stringify(faqSchema) }] : []),
+    ]
+
     return {
       meta: seo({
         title: page?.seo?.title ?? page?.title ?? "The Lounge Booth",
         description,
         image: withFilename(page?.seo?.ogImageUrl, page?.seo?.ogImageFilename) || undefined,
+        imageWidth: page?.seo?.ogImageWidth ?? undefined,
+        imageHeight: page?.seo?.ogImageHeight ?? undefined,
         url,
         noIndex: page?.seo?.noIndex ?? undefined,
       }),
       links: [{ rel: "canonical", href: url }],
+      scripts,
     }
   },
   notFoundComponent: () => <NotFound />,

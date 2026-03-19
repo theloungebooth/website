@@ -25,12 +25,14 @@ const homePageQueryOptions = () =>
 export const Route = createFileRoute("/_layout/")({
   loader: async ({ context: { queryClient } }) => queryClient.ensureQueryData(homePageQueryOptions()),
   head: ({ loaderData: page }) => {
-    const url = `${SITE_URL}/`
+    const url = `${SITE_URL}`
     return {
       meta: seo({
         title: page?.seo?.title ?? "The Lounge Booth",
         description: page?.seo?.description ?? undefined,
         image: withFilename(page?.seo?.ogImageUrl, page?.seo?.ogImageFilename) || undefined,
+        imageWidth: page?.seo?.ogImageWidth ?? undefined,
+        imageHeight: page?.seo?.ogImageHeight ?? undefined,
         url,
         noIndex: page?.seo?.noIndex ?? undefined,
       }),

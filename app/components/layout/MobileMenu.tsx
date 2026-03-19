@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import { AnimatePresence, motion } from "motion/react"
+import { useLocation } from "@tanstack/react-router"
 import type { SettingsData } from "~/types/sanity"
 import { SiteLink } from "./SiteLink"
 import { Button } from "../ui/Button"
@@ -13,7 +14,7 @@ const overlayVariants = {
     opacity: 1,
     transition: { duration: 0.25, ease: "easeOut" as const, staggerChildren: 0.06, delayChildren: 0.1 },
   },
-  exit: { opacity: 0, transition: { duration: 0.2, ease: "easeIn" as const } },
+  exit: { opacity: 0, transition: { duration: 0 } },
 }
 
 const itemVariants = {
@@ -23,6 +24,11 @@ const itemVariants = {
 
 export function MobileMenu({ settings }: { settings: SettingsData | null }) {
   const [isOpen, setIsOpen] = useState(false)
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : ""

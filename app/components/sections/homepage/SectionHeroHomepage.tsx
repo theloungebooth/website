@@ -29,20 +29,21 @@ export function SectionHeroHomepage({ heading, subheading, item, primaryLink, se
             )}
           </div>
         </FadeIn>
-        <FadeIn direction="up">
-          {item && (
-            <div className="mx-auto overflow-hidden rounded-4xl max-w-lg">
+        {item && (
+          <FadeIn direction="up">
+            <div className="mx-auto overflow-hidden rounded-custom md:max-w-lg">
               <div className="aspect-9/16 w-full bg-surface/65 rounded-custom">
                 <MediaItem
                   item={item}
                   widths={[400, 800, 1200]}
                   loading="eager"
+                  fetchPriority="high"
                   className="h-full w-[calc(100%+2px)] max-w-none object-cover -left-px -right-px"
                 />
               </div>
             </div>
-          )}
-        </FadeIn>
+          </FadeIn>
+        )}
       </FadeInGroup>
     </Section>
   )

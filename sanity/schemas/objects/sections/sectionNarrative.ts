@@ -66,6 +66,13 @@ export const sectionNarrative = {
       initialValue: 'text-left',
     },
     {
+      name: 'invertOnMobile',
+      title: 'Invert on mobile',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Flip the column order on mobile screens.',
+    },
+    {
       name: 'heading',
       title: 'Heading',
       type: 'string',

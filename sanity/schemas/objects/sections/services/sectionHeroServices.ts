@@ -12,6 +12,12 @@ export const sectionHeroServices = {
   ],
   fields: [
     {
+      name: 'serviceType',
+      title: 'Service type',
+      type: 'string',
+      description: 'Displayed above the heading (e.g. "Weddings", "Brands", "Premieres")',
+    },
+    {
       name: 'heading',
       title: 'Heading',
       type: 'string',

@@ -23,6 +23,7 @@ type MediaItemProps = {
   sizes?: string
   widths?: number[]
   loading?: "eager" | "lazy"
+  fetchPriority?: "high" | "low" | "auto"
   className?: string
   draggable?: boolean
   /** Disables pointer events, drag, and the play/pause button — use in non-interactive contexts like auto-scrolling galleries */
@@ -34,6 +35,7 @@ export function MediaItem({
   sizes = "(max-width: 1024px) 90vw, 45vw",
   widths = [400, 800, 1200],
   loading = "lazy",
+  fetchPriority,
   className = "h-full w-full object-cover",
   draggable,
   nonInteractive,
@@ -42,6 +44,7 @@ export function MediaItem({
   const [isPlaying, setIsPlaying] = useState(true)
   const [showButton, setShowButton] = useState(false)
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const touchStartYRef = useRef<number | null>(null)
 
   function triggerButtonShow() {
     if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current)
@@ -62,7 +65,16 @@ export function MediaItem({
     triggerButtonShow()
   }
 
-  function handleContainerTouch(e: React.TouchEvent) {
+  function handleContainerTouchStart(e: React.TouchEvent) {
+    touchStartYRef.current = e.touches[0].clientY
+  }
+
+  function handleContainerTouchEnd(e: React.TouchEvent) {
+    const startY = touchStartYRef.current
+    if (startY === null) return
+    const deltaY = Math.abs(e.changedTouches[0].clientY - startY)
+    touchStartYRef.current = null
+    if (deltaY > 10) return // scroll gesture, not a tap
     e.preventDefault()
     togglePlay()
   }
@@ -71,7 +83,8 @@ export function MediaItem({
     return (
       <div
         className={cn("relative h-full w-full group", nonInteractive && "pointer-events-none")}
-        onTouchEnd={nonInteractive ? undefined : handleContainerTouch}
+        onTouchStart={nonInteractive ? undefined : handleContainerTouchStart}
+        onTouchEnd={nonInteractive ? undefined : handleContainerTouchEnd}
       >
         <video
           ref={videoRef}
@@ -111,14 +124,27 @@ export function MediaItem({
   }
 
   if (item.imageUrl) {
+    // Compute post-crop dimensions so the browser can reserve the correct
+    // aspect ratio before the image loads, preventing layout shift (CLS).
+    let intrinsicWidth = item.imageWidth ?? undefined
+    let intrinsicHeight = item.imageHeight ?? undefined
+    if (item.imageCrop && intrinsicWidth && intrinsicHeight) {
+      const { top, bottom, left, right } = item.imageCrop
+      intrinsicWidth = Math.round(intrinsicWidth * (1 - left - right))
+      intrinsicHeight = Math.round(intrinsicHeight * (1 - top - bottom))
+    }
+
     return (
       <img
         src={imgUrl(item.imageUrl, { w: stepWidth(widths[widths.length - 1]), filename: item.imageFilename, sanityCrop: item.imageCrop, sanityHotspot: item.imageHotspot, imageWidth: item.imageWidth, imageHeight: item.imageHeight })}
         srcSet={widths.map((w) => `${imgUrl(item.imageUrl, { w: stepWidth(w), filename: item.imageFilename, sanityCrop: item.imageCrop, sanityHotspot: item.imageHotspot, imageWidth: item.imageWidth, imageHeight: item.imageHeight })} ${w}w`).join(", ")}
         sizes={sizes}
         alt={item.alt ?? ""}
+        width={intrinsicWidth}
+        height={intrinsicHeight}
         className={className}
         loading={loading}
+        fetchPriority={fetchPriority}
         draggable={nonInteractive ? false : draggable}
         style={{
           objectPosition: hotspotObjectPosition(item.imageHotspot, item.imageCrop),

@@ -4,8 +4,9 @@ import { motion, useReducedMotion } from "motion/react"
 import type { SectionGalleryItem, SectionGalleryServices } from "~/types/sanity"
 import { MediaItem } from "~/components/ui/MediaItem"
 import { FadeIn } from "~/components/ui/FadeIn"
-import { Section } from "~/components/ui/Section"
+import { Section, SectionClasses } from "~/components/ui/Section"
 import { useIsMd } from "~/hooks/useBreakpoint"
+import { cn } from "~/lib/cn"
 
 const ITEM_W_SM = 220 // px — below md
 const ITEM_W_MD = 420 // px — md and above
@@ -34,17 +35,15 @@ export function SectionGalleryServices({ heading, items, anchorId }: SectionGall
   const endX = -(totalSingleWidth * 0.5)
 
   return (
-    <section id={anchorId ?? undefined} className="overflow-hidden py-22 md:py-30">
+    <Section id={anchorId ?? undefined} className="overflow-hidden max-w-none px-0!">
       {heading && (
-        <Section className="pb-10 lg:pb-14">
-          <FadeIn direction="up" className="text-left">
-            <h2 className="type-2xl text-balance max-w-150">{heading}</h2>
-          </FadeIn>
-        </Section>
+        <FadeIn direction="up" className={cn(SectionClasses, "text-left pb-8 lg:pb-14")}>
+          <h2 className="type-xl font-semibold md:type-2xl text-balance md:max-w-150">{heading}</h2>
+        </FadeIn>
       )}
 
       {hasItems && (
-        <div className="w-full overflow-hidden">
+        <div aria-hidden="true" className="w-full overflow-hidden">
           {shouldReduceMotion ? (
             <div className="flex" style={{ gap: `${gapPx}px`, transform: `translateX(${startX}px)` }}>
               {track.map((item, i) => (
@@ -72,7 +71,7 @@ export function SectionGalleryServices({ heading, items, anchorId }: SectionGall
           )}
         </div>
       )}
-    </section>
+    </Section>
   )
 }
 

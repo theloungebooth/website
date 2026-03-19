@@ -5,7 +5,7 @@ import { FadeIn } from "~/components/ui/FadeIn"
 import { Section } from "~/components/ui/Section"
 import { cn } from "~/lib/cn"
 
-export function SectionSplit({ heading, body, media, layout, anchorId }: SectionSplit) {
+export function SectionSplit({ heading, body, media, layout, invertOnMobile, anchorId }: SectionSplit) {
   const mediaRight = layout !== "text-right"
 
   const textCol = (
@@ -28,8 +28,8 @@ export function SectionSplit({ heading, body, media, layout, anchorId }: Section
       id={anchorId ?? undefined}
       className="grid grid-cols-1 md:grid-cols-2 gap-y-10 sm:gap-y-12 gap-x-12 xl:gap-x-16 items-center"
     >
-      <div className={cn("order-1", !mediaRight && "md:order-2")}>{textCol}</div>
-      <div className={cn("order-2", !mediaRight && "md:order-1")}>{mediaCol}</div>
+      <div className={cn("order-1", !mediaRight && "md:order-2", invertOnMobile && "max-md:order-2")}>{textCol}</div>
+      <div className={cn("order-2", !mediaRight && "md:order-1", invertOnMobile && "max-md:order-1")}>{mediaCol}</div>
     </Section>
   )
 }

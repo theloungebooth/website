@@ -48,14 +48,33 @@ function SiteLayout() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "ProfessionalService",
     name: "The Lounge Booth",
     url: import.meta.env.VITE_SITE_URL ?? "https://www.theloungebooth.com",
     logo: `${import.meta.env.VITE_SITE_URL ?? "https://www.theloungebooth.com"}/icon.svg`,
+    image: withFilename(settings?.defaultSeo?.ogImageUrl, settings?.defaultSeo?.ogImageFilename) || undefined,
     telephone: "+17604580079",
     email: "info@theloungebooth.com",
     description:
       settings?.defaultSeo?.description ?? "Premium photo booth hire for weddings, corporate events and social occasions.",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "18575 Jamboree Rd",
+      addressLocality: "Irvine",
+      addressRegion: "CA",
+      postalCode: "92612",
+      addressCountry: "US",
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "United States",
+    },
+    priceRange: "$$$",
+    makesOffer: {
+      "@type": "Offer",
+      availability: "https://schema.org/OnlineOnly",
+      description: "Available by appointment only",
+    },
     sameAs: settings?.socialLinks?.map((l) => l.href).filter(Boolean) ?? [],
   }
 

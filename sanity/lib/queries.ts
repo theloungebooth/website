@@ -11,6 +11,8 @@ const SEO_FRAGMENT = /* groq */ `
     description,
     "ogImageUrl": ogImage.asset->url,
     "ogImageFilename": ogImage.asset->originalFilename,
+    "ogImageWidth": ogImage.asset->metadata.dimensions.width,
+    "ogImageHeight": ogImage.asset->metadata.dimensions.height,
     noIndex,
   }
 `
@@ -33,6 +35,7 @@ const SECTIONS_FRAGMENT = /* groq */ `
     // sectionHeroHomepage / sectionHeroContact
     heading,
     subheading,
+    serviceType,
 
     // sectionHeroContact
     contactDetails,
@@ -173,6 +176,7 @@ const SECTIONS_FRAGMENT = /* groq */ `
 
     // sectionNarrative (Split)
     layout,
+    invertOnMobile,
     heading,
     body,
     "media": media {

@@ -11,9 +11,9 @@ export function SectionIntroServices({ heading, items, body, anchorId }: Section
     <Section id={anchorId ?? undefined}>
       <FadeInGroup stagger={0.2} className="flex flex-col items-center">
         <FadeIn direction="up" className="w-full text-center">
-          <h2 className="type-2xl text-balance max-w-200 pb-5 mx-auto">{heading}</h2>
+          <h2 className="type-xl font-semibold md:type-2xl text-balance max-w-200 pb-3.5 md:pb-5 mx-auto">{heading}</h2>
           {body && (
-            <div className="max-w-187.5 text-balance mx-auto color-primary-muted text-center">
+            <div className="md:max-w-187.5 text-balance mx-auto color-primary-muted text-center">
               <PortableTextRenderer value={body} />
             </div>
           )}

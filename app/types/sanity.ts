@@ -34,6 +34,8 @@ export type SeoData = {
   description?: string | null
   ogImageUrl?: string | null
   ogImageFilename?: string | null
+  ogImageWidth?: number | null
+  ogImageHeight?: number | null
   noIndex?: boolean | null
 }
 
@@ -183,6 +185,7 @@ export type SectionHeroAbout = {
 export type SectionHeroServices = {
   _type: 'sectionHeroServices'
   _key: string
+  serviceType?: string | null
   heading: string
   subheading?: string | null
   primaryLink?: SanityLink | null
@@ -202,6 +205,7 @@ export type SectionSplit = {
   _type: 'sectionNarrative'
   _key: string
   layout?: 'text-left' | 'text-right' | null
+  invertOnMobile?: boolean | null
   heading?: string | null
   body?: PortableTextBlock[] | null
   media?: {

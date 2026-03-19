@@ -72,10 +72,11 @@
 
   html {
     scroll-behavior: smooth;
+    background-color: var(--color-primary);
   }
 
   body {
-    background-color: var(--color-secondary);
+    background-color: var(--color-primary);
     color: var(--color-primary-muted);
     font-family: var(--font-sans);
     font-weight: 400;
@@ -161,4 +162,69 @@
   .text-link {
     @apply hover:opacity-60 transition-opacity ease-linear;
   }
+}
+
+/* ─── Social section ────────────────────────────────────────────────────────── */
+
+@keyframes social-orbit {
+  0%   { transform: translate(0px, -25px) }
+  10%  { transform: translate(-14.7px, -20.2px) }
+  20%  { transform: translate(-23.8px, -7.7px) }
+  30%  { transform: translate(-23.8px, 7.7px) }
+  40%  { transform: translate(-14.7px, 20.2px) }
+  50%  { transform: translate(0px, 25px) }
+  60%  { transform: translate(14.7px, 20.2px) }
+  70%  { transform: translate(23.8px, 7.7px) }
+  80%  { transform: translate(23.8px, -7.7px) }
+  90%  { transform: translate(14.7px, -20.2px) }
+  100% { transform: translate(0px, -25px) }
+}
+
+@keyframes social-pop {
+  0%   { transform: scale(1)    }
+  35%  { transform: scale(1.35) }
+  65%  { transform: scale(0.92) }
+  85%  { transform: scale(1.06) }
+  100% { transform: scale(1)    }
+}
+
+/* Desktop positions */
+.social-photo-0  { top: 6%;    left: 48.9%; }
+.social-photo-1  { top: 11.4%; left: 89.1%; }
+.social-photo-2  { top: 84.6%; left: 74.5%; }
+.social-photo-3  { top: 14.3%; left: 0.4%;  }
+.social-photo-4  { top: 10.1%; left: 20.9%; }
+.social-photo-5  { top: 20%;   left: 68.6%; }
+.social-photo-6  { top: 42.3%; left: 5.6%;  }
+.social-photo-7  { top: 40.7%; left: 87.1%; }
+.social-photo-8  { top: 66.6%; left: 0%;    }
+.social-photo-9  { top: 82.7%; left: 22.6%; }
+.social-photo-10 { top: 74.3%; left: 48%;   }
+.social-photo-11 { top: 66.6%; left: 93.7%; }
+
+@media (max-width: 767px) {
+  @keyframes social-orbit {
+    0%   { transform: translate(0px, -8px) }
+    10%  { transform: translate(-4.7px, -6.5px) }
+    20%  { transform: translate(-7.6px, -2.5px) }
+    30%  { transform: translate(-7.6px, 2.5px) }
+    40%  { transform: translate(-4.7px, 6.5px) }
+    50%  { transform: translate(0px, 8px) }
+    60%  { transform: translate(4.7px, 6.5px) }
+    70%  { transform: translate(7.6px, 2.5px) }
+    80%  { transform: translate(7.6px, -2.5px) }
+    90%  { transform: translate(4.7px, -6.5px) }
+    100% { transform: translate(0px, -8px) }
+  }
+
+  /* Mobile positions */
+  .social-photo-0  { top: 8%;  left: 40%; }
+  .social-photo-1  { top: 15%; left: 75%; }
+  .social-photo-2  { top: 84%; left: 55%; }
+  .social-photo-3  { top: 15%; left: 4%;  }
+  .social-photo-6  { top: 41%; left: 4%;  }
+  .social-photo-7  { top: 41%; left: 75%; }
+  .social-photo-8  { top: 68%; left: 2%;  }
+  .social-photo-9  { top: 84%; left: 24%; }
+  .social-photo-11 { top: 68%; left: 77%; }
 }

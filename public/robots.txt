@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /studio
+Disallow: /studio/
+Disallow: /api/
+
+Sitemap: https://www.theloungebooth.com/sitemap.xml

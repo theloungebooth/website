@@ -157,7 +157,7 @@ export function SectionContact({ heading, subheading, items, formFields, anchorI
         <FadeIn direction="up" className="lg:order-first">
           {media && (
             <div className="aspect-4/5 w-full bg-surface/65 rounded-custom overflow-hidden">
-              <MediaItem item={media} sizes="(max-width: 1024px) 90vw, 50vw" widths={[400, 640, 900, 1280]} loading="eager" />
+              <MediaItem item={media} sizes="(max-width: 1024px) 90vw, 50vw" widths={[400, 640, 900, 1280]} loading="eager" fetchPriority="high" />
             </div>
           )}
         </FadeIn>

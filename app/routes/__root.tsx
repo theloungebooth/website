@@ -9,10 +9,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#000000" },
     ],
     links: [
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", href: "/icon.svg", type: "image/svg+xml" },
+      { rel: "preconnect", href: "https://cdn.sanity.io" },
     ],
   }),
   errorComponent: (props) => (

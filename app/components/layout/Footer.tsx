@@ -79,13 +79,11 @@ export function Footer({
         </div>
 
         {/* Right: site nav + contact */}
-        {isMd && (
-          <nav className="flex items-center justify-center gap-x-5 gap-y-1" aria-label="Footer navigation">
-            {settings?.secondaryNav?.map((link) => (
-              <SiteLink key={link.label} link={link} className="type-base-minus text-link" />
-            ))}
-          </nav>
-        )}
+        <nav className="hidden md:flex items-center justify-center gap-x-5 gap-y-1" aria-label="Footer navigation">
+          {settings?.secondaryNav?.map((link) => (
+            <SiteLink key={link.label} link={link} className="type-base-minus text-link" />
+          ))}
+        </nav>
       </div>
     </footer>
   )

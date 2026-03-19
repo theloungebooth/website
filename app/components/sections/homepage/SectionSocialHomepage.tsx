@@ -1,11 +1,57 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
+import { motion, useMotionValue, useTransform, animate, useInView, useReducedMotion } from "motion/react"
 import type { SectionSocialHomepage } from "~/types/sanity"
 import { cn } from "~/lib/cn"
 import { MediaItem } from "~/components/ui/MediaItem"
 import { FadeIn, FadeInGroup } from "~/components/ui/FadeIn"
 import { FadeInScatter } from "~/components/ui/FadeInScatter"
+
+// Splits a stat string like "180K", "50M", or "650" into its numeric
+// part and trailing suffix so we can animate the number independently.
+function parseStatValue(raw: string) {
+  const match = raw.match(/^([\d.]+)([^\d.]*)$/)
+  if (!match) return { num: 0, suffix: raw }
+  return { num: parseFloat(match[1]), suffix: match[2] }
+}
+
+// Counts up from 0 to the target value when it scrolls into view,
+// mirroring the same viewport margin used by FadeIn/FadeInGroup so
+// the count starts the moment the number begins to appear.
+function StatCounter({ value }: { value: string }) {
+  const shouldReduceMotion = useReducedMotion()
+  const { num, suffix } = parseStatValue(value)
+  const count = useMotionValue(0)
+  const ref = useRef<HTMLSpanElement>(null)
+
+  // Once: true — count only fires once, same as the FadeIn reveal.
+  // Margin matches FadeInGroup so they're perfectly in sync.
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px" })
+
+  // Transform the raw float into a formatted display string.
+  // All current values are whole numbers, so Math.round is correct;
+  // preserving this as a transform keeps it reactive with no re-renders.
+  const display = useTransform(count, (v) => `${Math.round(v)}${suffix}`)
+
+  useEffect(() => {
+    if (!isInView || shouldReduceMotion) return
+
+    const controls = animate(count, num, {
+      // Deceleration curve: rockets off the start, eases into the final value.
+      // This makes the ending feel intentional rather than mechanical.
+      duration: 1.8,
+      ease: [0.16, 1, 0.3, 1], // expo-out feel
+    })
+
+    return controls.stop
+  }, [isInView, shouldReduceMotion, count, num])
+
+  // Reduced-motion: skip the animation entirely, just render the value.
+  if (shouldReduceMotion) return <span>{value}</span>
+
+  return <motion.span ref={ref}>{display}</motion.span>
+}
 
 // Phase offsets stay within ~20% of the cycle (≤2s of 10s) so all images
 // remain in the same arc at any moment — same direction, subtle variance.
@@ -24,6 +70,7 @@ const POSITIONS = [
   { top: "74.3%", left: "48%", phase: -1.4, duration: 10.4, mobileHidden: true },
   { top: "66.6%", left: "93.7%", phase: -0.8, duration: 9.9 },
 ]
+
 
 // Pre-compute per-image scatter offsets: a unit vector from each image's position
 // toward the container center (50%, 50%), scaled to SCATTER_RADIUS px.
@@ -48,48 +95,9 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
       id={anchorId ?? undefined}
       className="relative min-h-175 md:min-h-screen flex items-center justify-center overflow-hidden py-18 md:py-24"
     >
-      {/* Smooth circular path sampled every 36° */}
-      <style>{`
-        @keyframes social-orbit {
-          0%   { transform: translate(0px, -25px) }
-          10%  { transform: translate(-14.7px, -20.2px) }
-          20%  { transform: translate(-23.8px, -7.7px) }
-          30%  { transform: translate(-23.8px, 7.7px) }
-          40%  { transform: translate(-14.7px, 20.2px) }
-          50%  { transform: translate(0px, 25px) }
-          60%  { transform: translate(14.7px, 20.2px) }
-          70%  { transform: translate(23.8px, 7.7px) }
-          80%  { transform: translate(23.8px, -7.7px) }
-          90%  { transform: translate(14.7px, -20.2px) }
-          100% { transform: translate(0px, -25px) }
-        }
-        @media (max-width: 767px) {
-          @keyframes social-orbit {
-            0%   { transform: translate(0px, -12px) }
-            10%  { transform: translate(-7px, -9.7px) }
-            20%  { transform: translate(-11.4px, -3.7px) }
-            30%  { transform: translate(-11.4px, 3.7px) }
-            40%  { transform: translate(-7px, 9.7px) }
-            50%  { transform: translate(0px, 12px) }
-            60%  { transform: translate(7px, 9.7px) }
-            70%  { transform: translate(11.4px, 3.7px) }
-            80%  { transform: translate(11.4px, -3.7px) }
-            90%  { transform: translate(7px, -9.7px) }
-            100% { transform: translate(0px, -12px) }
-          }
-        }
-        @keyframes social-pop {
-          0%   { transform: scale(1)    }
-          35%  { transform: scale(1.35) }
-          65%  { transform: scale(0.92) }
-          85%  { transform: scale(1.06) }
-          100% { transform: scale(1)    }
-        }
-      `}</style>
-
       {/* Floating images — absoluteWrappers fills each motion.div to container size so
           child top/left percentages resolve correctly despite the scatter transforms. */}
-      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none flex items-center justify-center">
         <FadeInScatter absoluteWrappers scatterOffsets={scatterOffsets} className="relative w-full h-175 md:h-[85vh] max-w-355">
           {POSITIONS.map((pos, i) => {
             const photo = uploadedPhotos[i]
@@ -98,19 +106,20 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
               // Isolated from the scatter motion.div so the two transforms don't conflict.
               <div
                 key={i}
-                className={cn("absolute w-20 sm:w-24 md:w-26 xl:w-32 aspect-square", pos.mobileHidden && "hidden md:block")}
+                className={cn(
+                  `absolute social-photo-${i} w-15 xs:w-18 sm:w-22 md:w-24 xl:w-32 aspect-square`,
+                  pos.mobileHidden && "hidden md:block",
+                )}
                 style={{
-                  top: pos.top,
-                  left: pos.left,
-                  animation: `social-orbit ${pos.duration}s linear infinite`,
-                  animationDelay: `${pos.phase}s`,
+                  animation: `social-orbit ${pos.duration}s linear ${pos.phase}s infinite`,
                 }}
               >
                 <div
-                  className="w-full h-full rounded-3xl md:rounded-custom overflow-hidden cursor-pointer pointer-events-auto select-none"
+                  className="w-full h-full rounded-2xl md:rounded-custom overflow-hidden cursor-pointer pointer-events-auto select-none"
                   style={poppingIndex === i ? { animation: "social-pop 0.45s ease-out" } : undefined}
                   onClick={() => setPoppingIndex(i)}
                   onAnimationEnd={() => setPoppingIndex(null)}
+                  aria-hidden="true"
                 >
                   {photo?.imageUrl || photo?.videoUrl ? (
                     <MediaItem
@@ -144,16 +153,18 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
         )}
 
         {stats && stats?.length > 0 && (
-          <div className="flex gap-x-12 lg:gap-x-16 gap-y-8 md:gap-y-10 flex-col md:flex-row items-center justify-center">
+          <dl className="flex gap-x-12 lg:gap-x-16 gap-y-8 md:gap-y-10 flex-col md:flex-row items-center justify-center">
             {stats.map((stat) => (
               <FadeIn direction="up" key={stat._key}>
                 <div className="flex flex-col items-center">
-                  <p className="type-3xl md:type-4xl text-primary">{stat.value}</p>
-                  <p className="type-base md:type-base-plus">{stat.label}</p>
+                  <dd className="type-3xl md:type-4xl text-primary">
+                    <StatCounter value={stat.value} />
+                  </dd>
+                  <dt className="type-base md:type-base-plus">{stat.label}</dt>
                 </div>
               </FadeIn>
             ))}
-          </div>
+          </dl>
         )}
       </FadeInGroup>
     </section>

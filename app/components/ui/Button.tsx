@@ -68,7 +68,7 @@ export function Button({ className, variant = "primary", arrow, ...props }: Butt
 
   const { children, ...buttonRest } = props as ButtonAsButton
   return (
-    <button {...buttonRest} className={cls}>
+    <button type="button" {...buttonRest} className={cls}>
       {arrow ? <ArrowContent variant={variant}>{children}</ArrowContent> : children}
     </button>
   )

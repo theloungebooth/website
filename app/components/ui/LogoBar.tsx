@@ -10,12 +10,12 @@ const LOGO_SIZES: Record<string, string> = {
 
 export function LogoBar() {
   return (
-    <div className="flex pt-6 md:pt-10 items-center justify-start gap-4 md:gap-x-2">
+    <div className="flex pt-2 md:pt-4 -ml-1.5 items-center justify-start gap-x-4 md:gap-x-2">
       {CLIENT_LOGOS.map((logo, index) => (
         <span
           key={logo.name}
           className={cn(
-            "flex items-center justify-start text-primary-muted/80 [&>svg]:max-w-full [&>svg]:max-h-full [&>svg]:w-auto [&>svg]:h-auto",
+            "flex items-center justify-start text-primary-muted/45 [&>svg]:max-w-full [&>svg]:max-h-full [&>svg]:w-auto [&>svg]:h-auto",
             index >= 4 && "hidden md:flex",
             LOGO_SIZES[logo.name] ?? "w-28 h-7",
           )}

@@ -43,11 +43,11 @@ function StickyScrollLayout({
   const wrapperHeight = n > 0 ? `calc(100vh + 2.5 * (${n + 1} * (100vw - 3rem) / 4 + ${n - 1} * 2rem - 100vw))` : "auto"
 
   return (
-    <div ref={wrapperRef} id={anchorId ?? undefined} style={{ height: wrapperHeight }} className="py-20">
+    <div ref={wrapperRef} id={anchorId ?? undefined} style={{ height: wrapperHeight }}>
       <section className="sticky top-0 h-screen overflow-x-clip flex flex-col justify-center">
         {heading && (
           <FadeIn direction="up">
-            <h2 className="type-2xl text-center text-balance pb-16 px-4 flex-none">{heading}</h2>
+            <h2 className="type-2xl text-center text-balance pb-16 flex-none">{heading}</h2>
           </FadeIn>
         )}
 
@@ -122,7 +122,7 @@ export function SectionServicesHomepage({ heading, services, anchorId }: Section
     <Section id={anchorId ?? undefined}>
       {heading && (
         <FadeIn direction="up">
-          <h2 className="type-2xl text-center text-balance pb-12 md:pb-8 px-4">{heading}</h2>
+          <h2 className="type-xl font-semibold md:type-2xl text-center text-balance pb-8 md:pb-10 lg:pb-16">{heading}</h2>
         </FadeIn>
       )}
 

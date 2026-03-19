@@ -148,7 +148,7 @@ export function SectionSocialHomepage({ heading, stats, photos, anchorId }: Sect
             {stats.map((stat) => (
               <FadeIn direction="up" key={stat._key}>
                 <div className="flex flex-col items-center">
-                  <p className="type-4xl text-primary">{stat.value}</p>
+                  <p className="type-3xl md:type-4xl text-primary">{stat.value}</p>
                   <p className="type-base md:type-base-plus">{stat.label}</p>
                 </div>
               </FadeIn>

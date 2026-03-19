@@ -68,10 +68,12 @@ export function SectionExplainer({ heading, subheading, steps, anchorId }: Secti
   }, [items])
 
   return (
-    <Section id={anchorId ?? undefined} className="pt-32 pb-32">
+    <Section id={anchorId ?? undefined}>
       {heading && (
         <FadeIn direction="up">
-          <h2 className="type-2xl text-center text-balance pb-16 md:pb-32 md:max-w-200 mx-auto">{heading}</h2>
+          <h2 className="type-xl font-semibold md:type-2xl text-center text-balance pb-8 sm:pb-12 md:pb-20 2xl:pb-32 md:max-w-200 mx-auto">
+            {heading}
+          </h2>
         </FadeIn>
       )}
 
@@ -98,7 +100,7 @@ export function SectionExplainer({ heading, subheading, steps, anchorId }: Secti
         </div>
 
         {/* Scrollable right content */}
-        <ul className="flex flex-col gap-y-20 md:gap-y-20 md:col-span-6 md:col-end-13">
+        <ul className="flex flex-col gap-y-12 md:gap-y-16 2xl:gap-y-20 md:col-span-6 md:col-end-13">
           {items.map((step, i) => (
             <StepItem key={step._key} step={step} index={i} isMd={isMd} />
           ))}

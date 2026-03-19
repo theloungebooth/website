@@ -1,5 +1,5 @@
 import { cn } from "~/lib/cn"
-import ArrowIcon from "./arrow.svg?react"
+import ArrowIcon from "../icons/ui/arrow.svg?react"
 
 type ButtonVariant = "primary" | "secondary" | "muted" | "outline"
 

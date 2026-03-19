@@ -51,6 +51,12 @@
   --radius-custom: 28px;
 }
 
+@media (max-width: 768px) {
+  :root {
+    --radius-custom: 22px;
+  }
+}
+
 @layer base {
   *,
   *::before,

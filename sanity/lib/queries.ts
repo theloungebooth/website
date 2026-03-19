@@ -231,6 +231,7 @@ export const settingsQuery = /* groq */ `
       "ogImageFilename": ogImage.asset->originalFilename,
     },
     "headerNav": headerNav[] { ${LINK_FIELDS} },
+    "headerCta": headerCta { ${LINK_FIELDS} },
     "mobileNav": mobileNav[] { ${LINK_FIELDS} },
     "footerNavSite": footerNavSite[] { ${LINK_FIELDS} },
     "footerNavLegal": footerNavLegal[] { ${LINK_FIELDS} },

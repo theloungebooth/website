@@ -363,6 +363,7 @@ export type SettingsData = {
     ogImageFilename?: string | null
   } | null
   headerNav?: SanityLink[] | null
+  headerCta?: SanityLink | null
   mobileNav?: SanityLink[] | null
   footerNavSite?: SanityLink[] | null
   footerNavLegal?: SanityLink[] | null

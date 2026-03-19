@@ -1,4 +1,5 @@
 import { cn } from "~/lib/cn"
+import ArrowIcon from "./arrow.svg?react"
 
 type ButtonVariant = "primary" | "secondary" | "muted" | "outline"
 
@@ -40,16 +41,9 @@ function ArrowContent({ children, variant }: { children: React.ReactNode; varian
           variant === "outline" && "bg-surface text-primary",
         )}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="size-4">
-          <path
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="48"
-            d="M268 112l144 144-144 144M392 256H100"
-          />
-        </svg>
+        <div className="size-4">
+          <ArrowIcon />
+        </div>
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
 import { Outlet, createFileRoute, useMatches } from "@tanstack/react-router"
 import { createServerFn } from "@tanstack/react-start"
+import globalStyles from "~/styles/globals.css?url"
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query"
 import { publicSanityClient } from "@sanity/lib/client"
 import { settingsQuery } from "@sanity/lib/queries"
@@ -8,12 +9,13 @@ import { Header } from "~/components/layout/Header"
 import { Footer } from "~/components/layout/Footer"
 import { seo } from "~/utils/seo"
 import { withFilename } from "~/lib/imgUrl"
+import { deepSmartify } from "~/utils/smartQuotes"
 import { useIsMd, useIsSm } from "~/hooks/useBreakpoint"
 import { cn } from "~/lib/cn"
 
 const fetchSettings = createServerFn({ method: "GET" }).handler(async () => {
   const data = await publicSanityClient.fetch<SettingsData>(settingsQuery)
-  return data ?? null
+  return data ? deepSmartify(data) : null
 })
 
 export const settingsQueryOptions = () =>
@@ -26,6 +28,7 @@ export const settingsQueryOptions = () =>
 export const Route = createFileRoute("/_layout")({
   loader: async ({ context: { queryClient } }) => queryClient.ensureQueryData(settingsQueryOptions()),
   head: ({ loaderData: settings }) => ({
+    links: [{ rel: "stylesheet", href: globalStyles }],
     meta: seo({
       title: settings?.defaultSeo?.siteTitle ?? "The Lounge Booth",
       description: settings?.defaultSeo?.description ?? undefined,

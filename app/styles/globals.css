@@ -85,6 +85,10 @@
   hr {
     border-color: var(--color-surface);
   }
+
+  svg {
+    @apply w-full h-full;
+  }
 }
 
 @layer components {

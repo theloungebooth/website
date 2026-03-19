@@ -7,7 +7,7 @@ import { FadeIn, FadeInGroup } from "~/components/ui/FadeIn"
 import { cn } from "~/lib/cn"
 
 const inputCls =
-  "w-full border border-surface bg-surface rounded-xl px-4 py-3 text-primary placeholder:color-primary-muted focus:outline-none focus:border-primary-muted transition-colors ease-linear type-base"
+  "w-full border border-surface bg-surface rounded-lg md:rounded-xl px-3.5 py-2.5 md:px-4 md:py-3 text-primary placeholder:color-primary-muted focus:outline-none focus:border-primary-muted transition-colors ease-linear type-base"
 
 function FormFieldInput({ field, value, onChange }: { field: FormField; value: string; onChange: (v: string) => void }) {
   const placeholder = field.placeholder ?? field.label
@@ -111,14 +111,14 @@ function ContactForm({ formFields }: Pick<SectionHeroContact, "formFields">) {
   if (status === "success") {
     return (
       <div className="py-8 mt-4 border-l-4 border-surface pl-6">
-        <p className="type-xl text-primary">Success.</p>
-        <p className="type-base-plus pt-3">We've received your enquiry and will come back to you soon.</p>
+        <p className="type-xl text-primary">Got it. We'll be in touch.</p>
+        <p className="type-base-plus pt-3">In the meantime, take a look at what we've been up to.</p>
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-y-3 md:gap-y-4">
       {formFields?.map((field) => (
         <FormFieldInput
           key={field._key}
@@ -130,7 +130,7 @@ function ContactForm({ formFields }: Pick<SectionHeroContact, "formFields">) {
 
       {status === "error" && <p className="type-sm text-red-500">{errorMessage}</p>}
 
-      <Button type="submit" variant="primary" arrow disabled={status === "loading"} className="mt-2 w-fit text-center">
+      <Button type="submit" variant="primary" arrow disabled={status === "loading"} className="mt-1 md:mt-2 w-fit text-center">
         {status === "loading" ? "Sending…" : "Send enquiry"}
       </Button>
     </form>
@@ -141,21 +141,25 @@ export function SectionContact({ heading, subheading, items, formFields, anchorI
   const media = items?.[0]
 
   return (
-    <Section id={anchorId ?? undefined} className="pt-0">
-      <FadeInGroup stagger={0.25} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* Left: heading + media */}
-        <FadeIn direction="up" className="order-1 md:order-unset">
+    <Section id={anchorId ?? undefined}>
+      <FadeInGroup
+        stagger={0.25}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 sm:gap-y-12 gap-x-12 xl:gap-x-16 items-center"
+      >
+        {/* Heading + form: first in DOM = first on mobile */}
+        <FadeIn direction="up">
+          <h1 className="type-3xl text-balance">{heading}</h1>
+          {subheading && <p className="type-base-plus pt-5 pb-7 md:pt-6 md:pb-8">{subheading}</p>}
+          <ContactForm formFields={formFields} />
+        </FadeIn>
+
+        {/* Media: second in DOM, but pulled to left column on desktop */}
+        <FadeIn direction="up" className="lg:order-first">
           {media && (
             <div className="aspect-4/5 w-full bg-surface rounded-custom overflow-hidden">
               <MediaItem item={media} sizes="(max-width: 1024px) 90vw, 50vw" widths={[400, 640, 900, 1280]} loading="eager" />
             </div>
           )}
-        </FadeIn>
-
-        <FadeIn direction="up" className="order-0 md:order-unset">
-          <h1 className="type-3xl text-balance">{heading}</h1>
-          {subheading && <p className="type-base-plus pt-6 pb-8">{subheading}</p>}
-          <ContactForm formFields={formFields} />
         </FadeIn>
       </FadeInGroup>
     </Section>

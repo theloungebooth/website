@@ -63,12 +63,12 @@ export function Footer({
       <div className="p-5 pb-10 sm:p-8 max-w-355 mx-auto flex text-primary-muted flex-row gap-x-6 justify-between items-start">
         {/* Left: copyright + legal links */}
         <div className="flex flex-wrap justify-between w-full flex-col md:flex-row md:w-auto md:justify-start items-center md:items-start gap-y-1">
-          <p className="type-base-minus pr-4 ">© {new Date().getFullYear()} The Lounge Booth</p>
-          <div className="flex gap-x-1.5">
+          <p className="type-base-minus pr-4">© {new Date().getFullYear()} The Lounge Booth</p>
+          <div className="flex gap-x-1 md:gap-x-1.5">
             {settings?.footerNavLegal?.map((link, index) => (
               <Fragment key={link.label}>
                 <SiteLink link={link} className="type-base-minus text-link" />
-                {index < (settings?.footerNavLegal?.length || 0) - 1 && (
+                {(settings?.footerNavLegal?.length || 0) === 2 && index === 0 && (
                   <span aria-hidden="true" className="type-base-minus">
                     &
                   </span>

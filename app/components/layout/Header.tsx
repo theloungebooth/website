@@ -27,9 +27,9 @@ export function Header({ settings }: { settings: SettingsData | null }) {
           ))}
         </nav>
 
-        {isMd && (
-          <Button variant="primary" href="/contact" className="ml-1.5">
-            Let's chat
+        {isMd && settings?.headerCta && (
+          <Button variant="primary" href={settings.headerCta.href} className="ml-1.5">
+            {settings.headerCta.label}
           </Button>
         )}
 

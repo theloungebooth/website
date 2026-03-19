@@ -16,6 +16,8 @@ const SKIP_KEYS = new Set([
   "mediaPosition",
   "anchorId",
   "style",
+  "seo",
+  "defaultSeo",
 ])
 
 function smartifyString(str: string): string {

@@ -1,10 +1,9 @@
 /// <reference types="vite/client" />
-import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from "@tanstack/react-router"
+import { HeadContent, Outlet, Scripts, createRootRouteWithContext, useRouterState } from "@tanstack/react-router"
+import { useEffect } from "react"
 import type { QueryClient } from "@tanstack/react-query"
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary"
 import { NotFound } from "~/components/NotFound"
-import globalStyles from "~/styles/globals.css?url"
-
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -12,7 +11,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
     ],
     links: [
-      { rel: "stylesheet", href: globalStyles },
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", href: "/icon.svg", type: "image/svg+xml" },
     ],
@@ -43,6 +41,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 })
 
 function RootComponent() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" })
+  }, [pathname])
+
   return (
     <html lang="en">
       <head>

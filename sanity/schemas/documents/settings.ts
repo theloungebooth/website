@@ -47,6 +47,12 @@ export const settings = {
       description: "Links shown in the site header (desktop).",
     },
     {
+      name: "headerCta",
+      title: "Header CTA button",
+      type: "link",
+      description: "Optional call-to-action button shown in the header (desktop) and mobile menu.",
+    },
+    {
       name: "mobileNav",
       title: "Mobile navigation",
       type: "array",

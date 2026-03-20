@@ -16,7 +16,7 @@ export function SectionHeroServices({ serviceType, heading, subheading, item, pr
           )}
           <h1 className="type-2xl md:type-3xl text-center md:text-left text-balance">{heading}</h1>
           {subheading && (
-            <p className="type-base md:type-base-plus color-primary-muted text-center md:text-left text-balance pt-5 md:pt-6">
+            <p className="type-base md:type-base-plus color-primary-muted  text-center md:text-left text-balance pt-5 md:pt-6">
               {subheading}
             </p>
           )}

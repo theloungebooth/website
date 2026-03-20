@@ -17,7 +17,7 @@ function StepItem({ step, isMd, index }: { step: ExplainerStep; index: number; i
             {index + 1}. {step.title}
           </h3>
         )}
-        <p className="type-base md:max-w-[90%]">{step.description}</p>
+        <p className="type-base text-pretty md:pr-2.5">{step.description}</p>
       </div>
       {hasMedia && (
         <div className="aspect-4/5 w-full overflow-hidden rounded-custom bg-surface/65">

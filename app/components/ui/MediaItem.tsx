@@ -96,7 +96,6 @@ export function MediaItem({
           autoPlay
           draggable={nonInteractive ? false : draggable}
           className={className}
-          title={item.alt ?? undefined}
           aria-label={item.alt ?? undefined}
           aria-hidden={!item.alt ? true : undefined}
         />

@@ -8,7 +8,7 @@ const components: PortableTextComponents = {
     logoBar: () => <LogoBar />,
   },
   block: {
-    normal: ({ children }) => <p className="pb-4 last:pb-0 type-base">{children}</p>,
+    normal: ({ children }) => <p className="pb-4 last:pb-0 type-base text-pretty">{children}</p>,
     h2: ({ children }) => <h2 className="pb-6 mt-10 type-3xl first:mt-0">{children}</h2>,
     h3: ({ children }) => <h3 className="pb-5 mt-8 type-2xl first:mt-0">{children}</h3>,
     h4: ({ children }) => <h4 className="pb-4 mt-6 type-xl first:mt-0">{children}</h4>,

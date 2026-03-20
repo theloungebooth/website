@@ -21,7 +21,7 @@ function AccordionItem({ _key, question, answer }: FaqItem) {
         aria-expanded={isOpen}
         aria-controls={panelId}
       >
-        <span className="type-base md:type-base-plus text-primary">{question}</span>
+        <span className="type-base text-primary">{question}</span>
         <span className="shrink-0 size-4.5 md:size-5 text-primary" aria-hidden>
           {isOpen ? <RemoveIcon /> : <AddIcon />}
         </span>
@@ -39,7 +39,7 @@ function AccordionItem({ _key, question, answer }: FaqItem) {
             transition={spring}
             className="overflow-hidden"
           >
-            <p className="pb-6 color-primary-muted">{answer}</p>
+            <p className="pb-6 color-primary-muted text-pretty type-base-minus">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>

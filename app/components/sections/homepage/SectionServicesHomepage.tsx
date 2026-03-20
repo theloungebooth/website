@@ -87,7 +87,7 @@ function StickyScrollLayout({
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ ...SPRING, delay: i * 0.32 + 0.14 }}
               >
-                {service.description && <p className="type-base max-w-[90%] color-primary-muted">{service.description}</p>}
+                {service.description && <p className="type-base pr-2.5 text-pretty color-primary-muted">{service.description}</p>}
               </motion.div>
             </li>
           ))}

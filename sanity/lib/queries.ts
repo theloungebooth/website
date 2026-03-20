@@ -105,7 +105,6 @@ const SECTIONS_FRAGMENT = /* groq */ `
       // sectionFaq
       question,
       answer,
-      // sectionAboutServices
       subheading,
       body,
     },

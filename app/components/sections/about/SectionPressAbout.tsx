@@ -14,10 +14,13 @@ function PressItemRow({ title, author, media, sourceUrl, publishedDate }: PressI
   const inner = (
     <div className={cn(ROW_COLS, "gap-y-1 py-4 md:py-5 items-baseline")}>
       <span className="type-base-minus group-hover:text-primary ease-linear transition-colors pr-4">{title}</span>
-      <span className="type-base-minus">{author}</span>
-      <span className="type-base-minus">{media}</span>
+      <span className="type-base-minus group-hover:text-primary ease-linear transition-colors">{author}</span>
+      <span className="type-base-minus group-hover:text-primary ease-linear transition-colors">{media}</span>
       {formattedDate ? (
-        <time className="type-base-minus whitespace-nowrap" dateTime={publishedDate ?? undefined}>
+        <time
+          className="type-base-minus whitespace-nowrap group-hover:text-primary ease-linear transition-colors"
+          dateTime={publishedDate ?? undefined}
+        >
           {formattedDate}
         </time>
       ) : (
@@ -56,7 +59,7 @@ export function SectionPressAbout({ heading, pressItems, anchorId }: SectionPres
       </FadeIn>
       <FadeInGroup stagger={0.07}>
         {pressItems.map((item) => (
-          <FadeIn key={item._key} direction="up" className="border-t  first:border-t-0 md:first:border-t border-primary-muted/20">
+          <FadeIn key={item._key} direction="up" className="border-t first:border-t-0 md:first:border-t border-primary-muted/20">
             <PressItemRow {...item} />
           </FadeIn>
         ))}

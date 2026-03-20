@@ -39,7 +39,7 @@ function AccordionItem({ _key, question, answer }: FaqItem) {
             transition={spring}
             className="overflow-hidden"
           >
-            <p className="pb-6 color-primary-muted text-pretty type-base-minus">{answer}</p>
+            <p className="pb-5 md:pb-6 text-pretty type-base-minus">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>

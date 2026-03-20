@@ -15,7 +15,6 @@ import { SectionLegalText } from "./legal/SectionLegalText"
 import { SectionQuote } from "./shared/SectionQuote"
 import { SectionFaq } from "./shared/SectionFaq"
 import { SectionExplainer } from "./shared/SectionExplainer"
-import { SectionAboutServices } from "./services/SectionAboutServices"
 function renderSection(section: Section, updatedAt?: string | null) {
   switch (section._type) {
     case "sectionHeroHomepage":
@@ -48,8 +47,6 @@ function renderSection(section: Section, updatedAt?: string | null) {
       return <SectionExplainer {...section} />
     case "sectionFaq":
       return <SectionFaq {...section} />
-    case "sectionAboutServices":
-      return <SectionAboutServices {...section} />
     default:
       return null
   }

@@ -105,7 +105,6 @@ export const page = {
         { type: 'sectionHeroServices' },
         { type: 'sectionIntroServices' },
         { type: 'sectionGalleryServices' },
-        { type: 'sectionAboutServices' },
         { type: 'sectionQuote' },
         { type: 'sectionFaq' },
         { type: 'sectionExplainer' },

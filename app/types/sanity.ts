@@ -280,32 +280,6 @@ export type SectionLegalText = {
   anchorId?: string | null
 }
 
-export type AboutServicesItem = {
-  _key: string
-  subheading: string
-  body?: string | null
-  mediaType?: 'image' | 'video' | null
-  imageUrl?: string | null
-  imageFilename?: string | null
-  imageWidth?: number | null
-  imageHeight?: number | null
-  imageCrop?: SanityCrop | null
-  imageHotspot?: SanityHotspot | null
-  videoUrl?: string | null
-  videoFilename?: string | null
-  thumbnailUrl?: string | null
-  thumbnailFilename?: string | null
-  alt?: string | null
-}
-
-export type SectionAboutServices = {
-  _type: 'sectionAboutServices'
-  _key: string
-  heading: string
-  items?: AboutServicesItem[] | null
-  anchorId?: string | null
-}
-
 export type PressItem = {
   _key: string
   title: string
@@ -352,7 +326,6 @@ export type Section =
   | SectionQuote
   | SectionLegalText
   | SectionFaq
-  | SectionAboutServices
   | SectionPressAbout
 
 // ─── Page ─────────────────────────────────────────────────────────────────────

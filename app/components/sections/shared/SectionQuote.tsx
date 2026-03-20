@@ -21,7 +21,7 @@ export function SectionQuote({ quote, authorName, authorTitle, anchorId }: Secti
           {(authorName || authorTitle) && (
             <figcaption className="text-center flex flex-col gap-y-0.5">
               {authorName && <span className="type-base font-medium">{authorName}</span>}
-              {authorTitle && <span className="type-base color-primary-muted">{authorTitle}</span>}
+              {authorTitle && <span className="type-base">{authorTitle}</span>}
             </figcaption>
           )}
         </figure>

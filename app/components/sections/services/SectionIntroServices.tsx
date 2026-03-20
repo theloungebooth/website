@@ -13,7 +13,7 @@ export function SectionIntroServices({ heading, items, body, anchorId }: Section
         <FadeIn direction="up" className="w-full text-center">
           <h2 className="type-xl font-semibold md:type-2xl text-balance max-w-200 pb-3.5 md:pb-5 mx-auto">{heading}</h2>
           {body && (
-            <div className="md:max-w-187.5 text-balance mx-auto color-primary-muted text-center">
+            <div className="md:max-w-187.5 text-balance mx-auto text-center">
               <PortableTextRenderer value={body} />
             </div>
           )}

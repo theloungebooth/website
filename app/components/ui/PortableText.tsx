@@ -12,9 +12,7 @@ const components: PortableTextComponents = {
     h2: ({ children }) => <h2 className="pb-6 mt-10 type-3xl first:mt-0">{children}</h2>,
     h3: ({ children }) => <h3 className="pb-5 mt-8 type-2xl first:mt-0">{children}</h3>,
     h4: ({ children }) => <h4 className="pb-4 mt-6 type-xl first:mt-0">{children}</h4>,
-    blockquote: ({ children }) => (
-      <blockquote className="border-l-2 border-surface pl-6 italic color-primary-muted">{children}</blockquote>
-    ),
+    blockquote: ({ children }) => <blockquote className="border-l-2 border-surface pl-6">{children}</blockquote>,
   },
   list: {
     bullet: ({ children }) => <ul className="list-disc pl-5 pb-4 last:pb-0">{children}</ul>,

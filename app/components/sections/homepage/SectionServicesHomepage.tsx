@@ -87,7 +87,7 @@ function StickyScrollLayout({
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ ...SPRING, delay: i * 0.32 + 0.14 }}
               >
-                {service.description && <p className="type-base pr-2.5 text-pretty color-primary-muted">{service.description}</p>}
+                {service.description && <p className="type-base pr-2.5 text-pretty">{service.description}</p>}
               </motion.div>
             </li>
           ))}
@@ -165,7 +165,7 @@ export function SectionServicesHomepage({ heading, services, anchorId }: Section
               transition={{ ...SPRING, delay: (i % 2) * 0.16 + 0.14 }}
             >
               {!isSm && <h3 className="type-lg leading-none text-primary font-medium">{service.heading}</h3>}
-              {service.description && <p className="type-base color-primary-muted">{service.description}</p>}
+              {service.description && <p className="type-base">{service.description}</p>}
               {!isSm && service.cta && (
                 <Button variant="outline" arrow href={service.cta.href} aria-label={service.cta.label} className="">
                   {isSm ? service.cta.label : "Learn more"}

@@ -1,5 +1,3 @@
-"use client"
-
 import { Children } from "react"
 import { motion, useReducedMotion } from "motion/react"
 

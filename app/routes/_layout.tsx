@@ -61,10 +61,10 @@ function SiteLayout() {
       settings?.defaultSeo?.description ?? "Premium photo booth hire for weddings, corporate events and social occasions.",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "18575 Jamboree Rd",
-      addressLocality: "Irvine",
+      streetAddress: "769 Newton Way",
+      addressLocality: "Costa Mesa",
       addressRegion: "CA",
-      postalCode: "92612",
+      postalCode: "92627",
       addressCountry: "US",
     },
     areaServed: {

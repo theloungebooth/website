@@ -15,7 +15,6 @@ import { sectionPressAbout } from './objects/sections/about/sectionPressAbout'
 import { sectionHeroServices } from './objects/sections/services/sectionHeroServices'
 import { sectionGalleryServices } from './objects/sections/services/sectionGalleryServices'
 import { sectionIntroServices } from './objects/sections/services/sectionIntroServices'
-import { sectionAboutServices } from './objects/sections/services/sectionAboutServices'
 import { sectionLegalText } from './objects/sections/sectionLegalText'
 import { sectionQuote } from './objects/sections/shared/sectionQuote'
 import { sectionFaq } from './objects/sections/shared/sectionFaq'
@@ -43,7 +42,6 @@ export const schemaTypes = [
   sectionHeroServices,
   sectionGalleryServices,
   sectionIntroServices,
-  sectionAboutServices,
   sectionLegalText,
   sectionQuote,
   sectionFaq,

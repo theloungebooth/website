@@ -1,5 +1,3 @@
-"use client"
-
 import { motion, useReducedMotion } from "motion/react"
 import type { SectionGalleryItem, SectionGalleryServices } from "~/types/sanity"
 import { MediaItem } from "~/components/ui/MediaItem"

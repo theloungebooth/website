@@ -9,10 +9,11 @@ export function SectionHeroAbout({ heading, subheading, item, primaryLink, ancho
     <Section id={anchorId ?? undefined}>
       <FadeInGroup className="text-center" stagger={0.25}>
         <FadeIn direction="up">
-          <h1 className="type-2xl md:type-3xl text-balance">{heading}</h1>
-          {subheading && (
-            <p className="type-base-plus color-primary-muted text-balance pt-4 md:pt-6 max-w-prose mx-auto">{subheading}</p>
-          )}
+          <h1 className="pb-5 md:pb-7 type-base tracking-wide text-center text-primary-muted md:text-left mx-auto w-fit">
+            About The Lounge Booth
+          </h1>
+          <h2 className="type-2xl md:type-3xl text-balance">{heading}</h2>
+          {subheading && <p className="type-base-plus text-balance pt-4 md:pt-6 max-w-prose mx-auto">{subheading}</p>}
           {primaryLink && (
             <div className="pt-8 flex justify-center">
               <Button variant="primary" href={primaryLink.href}>

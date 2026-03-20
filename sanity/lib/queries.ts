@@ -208,6 +208,16 @@ const SECTIONS_FRAGMENT = /* groq */ `
       role,
     },
 
+    // sectionPressAbout
+    "pressItems": items[] {
+      _key,
+      title,
+      author,
+      media,
+      sourceUrl,
+      publishedDate,
+    },
+
     // sectionQuote
     quote,
     authorName,

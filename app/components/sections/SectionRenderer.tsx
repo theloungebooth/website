@@ -7,6 +7,7 @@ import { SectionContact } from "./contact/SectionContact"
 import { SectionHeroAbout } from "./about/SectionHeroAbout"
 import { SectionSplit } from "./shared/SectionSplit"
 import { SectionTeamAbout } from "./about/SectionTeamAbout"
+import { SectionPressAbout } from "./about/SectionPressAbout"
 import { SectionHeroServices } from "./services/SectionHeroServices"
 import { SectionGalleryServices } from "./services/SectionGalleryServices"
 import { SectionIntroServices } from "./services/SectionIntroServices"
@@ -31,6 +32,8 @@ function renderSection(section: Section, updatedAt?: string | null) {
       return <SectionSplit {...section} />
     case "sectionTeamAbout":
       return <SectionTeamAbout {...section} />
+    case "sectionPressAbout":
+      return <SectionPressAbout {...section} />
     case "sectionHeroServices":
       return <SectionHeroServices {...section} />
     case "sectionGalleryServices":

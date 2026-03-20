@@ -100,25 +100,27 @@ export function MediaItem({
           aria-label={item.alt ?? undefined}
           aria-hidden={!item.alt ? true : undefined}
         />
-        {!nonInteractive && <button
-          onClick={togglePlay}
-          onTouchEnd={(e) => e.stopPropagation()}
-          aria-label={isPlaying ? "Pause" : "Play"}
-          className={cn(
-            "absolute cursor-pointer flex bottom-6 left-6 h-12 w-12 items-center justify-center rounded-full bg-primary-muted/60 text-white transition-all ease-linear hover:bg-primary-muted",
-            showButton ? "opacity-100" : "opacity-0 group-hover:opacity-100",
-          )}
-        >
-          {isPlaying ? (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-6 w-6 fill-current">
-              <path d="M208 432h-48a16 16 0 01-16-16V96a16 16 0 0116-16h48a16 16 0 0116 16v320a16 16 0 01-16 16zM352 432h-48a16 16 0 01-16-16V96a16 16 0 0116-16h48a16 16 0 0116 16v320a16 16 0 01-16 16z" />
-            </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-6 w-6 fill-current">
-              <path d="M133 440a35.37 35.37 0 01-17.5-4.67c-12-6.8-19.46-20-19.46-34.33V111c0-14.37 7.46-27.53 19.46-34.33a35.13 35.13 0 0135.77.45l247.85 148.36a36 36 0 010 61l-247.89 148.4A35.5 35.5 0 01133 440z" />
-            </svg>
-          )}
-        </button>}
+        {!nonInteractive && (
+          <button
+            onClick={togglePlay}
+            onTouchEnd={(e) => e.stopPropagation()}
+            aria-label={isPlaying ? "Pause" : "Play"}
+            className={cn(
+              "absolute cursor-pointer flex bottom-6 left-6 h-12 w-12 items-center justify-center rounded-full bg-primary-muted/60 text-white transition-all ease-linear hover:bg-primary-muted",
+              showButton ? "opacity-100" : "opacity-0 group-hover:opacity-100",
+            )}
+          >
+            {isPlaying ? (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-6 w-6 fill-current">
+                <path d="M208 432h-48a16 16 0 01-16-16V96a16 16 0 0116-16h48a16 16 0 0116 16v320a16 16 0 01-16 16zM352 432h-48a16 16 0 01-16-16V96a16 16 0 0116-16h48a16 16 0 0116 16v320a16 16 0 01-16 16z" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-6 w-6 fill-current">
+                <path d="M133 440a35.37 35.37 0 01-17.5-4.67c-12-6.8-19.46-20-19.46-34.33V111c0-14.37 7.46-27.53 19.46-34.33a35.13 35.13 0 0135.77.45l247.85 148.36a36 36 0 010 61l-247.89 148.4A35.5 35.5 0 01133 440z" />
+              </svg>
+            )}
+          </button>
+        )}
       </div>
     )
   }
@@ -136,8 +138,20 @@ export function MediaItem({
 
     return (
       <img
-        src={imgUrl(item.imageUrl, { w: stepWidth(widths[widths.length - 1]), filename: item.imageFilename, sanityCrop: item.imageCrop, sanityHotspot: item.imageHotspot, imageWidth: item.imageWidth, imageHeight: item.imageHeight })}
-        srcSet={widths.map((w) => `${imgUrl(item.imageUrl, { w: stepWidth(w), filename: item.imageFilename, sanityCrop: item.imageCrop, sanityHotspot: item.imageHotspot, imageWidth: item.imageWidth, imageHeight: item.imageHeight })} ${w}w`).join(", ")}
+        src={imgUrl(item.imageUrl, {
+          w: stepWidth(widths[widths.length - 1]),
+          filename: item.imageFilename,
+          sanityCrop: item.imageCrop,
+          sanityHotspot: item.imageHotspot,
+          imageWidth: item.imageWidth,
+          imageHeight: item.imageHeight,
+        })}
+        srcSet={widths
+          .map(
+            (w) =>
+              `${imgUrl(item.imageUrl, { w: stepWidth(w), filename: item.imageFilename, sanityCrop: item.imageCrop, sanityHotspot: item.imageHotspot, imageWidth: item.imageWidth, imageHeight: item.imageHeight })} ${w}w`,
+          )
+          .join(", ")}
         sizes={sizes}
         alt={item.alt ?? ""}
         width={intrinsicWidth}

@@ -11,6 +11,7 @@ import { sectionHeroContact } from './objects/sections/contact/sectionHeroContac
 import { sectionNarrative } from './objects/sections/sectionNarrative'
 import { sectionHeroAbout } from './objects/sections/about/sectionHeroAbout'
 import { sectionTeamAbout } from './objects/sections/about/sectionTeamAbout'
+import { sectionPressAbout } from './objects/sections/about/sectionPressAbout'
 import { sectionHeroServices } from './objects/sections/services/sectionHeroServices'
 import { sectionGalleryServices } from './objects/sections/services/sectionGalleryServices'
 import { sectionIntroServices } from './objects/sections/services/sectionIntroServices'
@@ -38,6 +39,7 @@ export const schemaTypes = [
   sectionNarrative,
   sectionHeroAbout,
   sectionTeamAbout,
+  sectionPressAbout,
   sectionHeroServices,
   sectionGalleryServices,
   sectionIntroServices,

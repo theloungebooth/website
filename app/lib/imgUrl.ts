@@ -45,6 +45,7 @@ type ImgUrlOpts = {
 
 export function imgUrl(url: string | null | undefined, opts: ImgUrlOpts = {}): string {
   if (!url) return ''
+
   const params = new URLSearchParams({ auto: 'format' })
 
   // Sanity crop → rect param (pixel coordinates)

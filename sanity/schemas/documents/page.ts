@@ -1,5 +1,6 @@
 import type { DocumentDefinition } from '@sanity/types'
-import { DocumentIcon } from '@sanity/icons'
+import React from 'react'
+import { DocumentIcon, HomeIcon, UsersIcon, StarIcon, EnvelopeIcon, BookIcon } from '@sanity/icons'
 import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
 
 const TEMPLATE_LABELS: Record<string, string> = {
@@ -9,6 +10,15 @@ const TEMPLATE_LABELS: Record<string, string> = {
   contact:   'Contact',
   caseStudy: 'Case study',
   legal:     'Legal',
+}
+
+const TEMPLATE_ICONS: Record<string, React.ComponentType> = {
+  homepage:  HomeIcon,
+  about:     UsersIcon,
+  service:   StarIcon,
+  contact:   EnvelopeIcon,
+  caseStudy: DocumentIcon,
+  legal:     BookIcon,
 }
 
 export const page = {
@@ -80,6 +90,7 @@ export const page = {
         { type: 'sectionHeroAbout' },
         { type: 'sectionNarrative' },
         { type: 'sectionTeamAbout' },
+        { type: 'sectionPressAbout' },
         { type: 'sectionQuote' },
         { type: 'sectionFaq' },
         { type: 'sectionExplainer' },
@@ -157,9 +168,11 @@ export const page = {
     prepare({ title, slug, template }: any) {
       const path = slug === 'home' ? '/ (home)' : slug ? `/${slug}` : 'No slug'
       const label = template ? TEMPLATE_LABELS[template] ?? template : 'No template'
+      const Icon = template ? TEMPLATE_ICONS[template] : undefined
       return {
         title: title ?? 'Untitled page',
         subtitle: `${label} · ${path}`,
+        media: Icon ? React.createElement(Icon) : undefined,
       }
     },
   },

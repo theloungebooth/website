@@ -306,6 +306,23 @@ export type SectionAboutServices = {
   anchorId?: string | null
 }
 
+export type PressItem = {
+  _key: string
+  title: string
+  author?: string | null
+  media?: string | null
+  sourceUrl?: string | null
+  publishedDate?: string | null
+}
+
+export type SectionPressAbout = {
+  _type: 'sectionPressAbout'
+  _key: string
+  heading?: string | null
+  pressItems?: PressItem[] | null
+  anchorId?: string | null
+}
+
 export type FaqItem = {
   _key: string
   question: string
@@ -336,6 +353,7 @@ export type Section =
   | SectionLegalText
   | SectionFaq
   | SectionAboutServices
+  | SectionPressAbout
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 

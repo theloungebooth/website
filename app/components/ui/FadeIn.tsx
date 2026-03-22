@@ -11,6 +11,7 @@ const directionOffset = {
   down: { y: -OFFSET },
   left: { x: OFFSET },
   right: { x: -OFFSET },
+  none: {},
 } satisfies Record<string, { x?: number; y?: number }>
 
 // Spring tuned for content reveals: snappy entry, no bounce.
@@ -42,25 +43,15 @@ const FadeInGroupContext = createContext(false)
 
 export interface FadeInProps extends Omit<HTMLMotionProps<"div">, "variants"> {
   direction?: Direction
-  /** Delay in seconds. Only applies when used standalone (not inside FadeInGroup). */
+  /** Delay in seconds before the animation starts. */
   delay?: number
   /** Override the default div with any HTML tag */
   as?: keyof React.JSX.IntrinsicElements
+  /** Animate on mount instead of waiting for viewport intersection. Use for above-the-fold content. */
+  immediate?: boolean
 }
 
-/**
- * FadeIn — a directional fade-in wrapper.
- *
- * Standalone: triggers on scroll via whileInView.
- * Inside FadeInGroup: parent drives timing; stagger is applied automatically.
- *
- * Respects `prefers-reduced-motion`.
- *
- * Usage:
- *   <FadeIn direction="up">…</FadeIn>
- *   <FadeIn direction="left" delay={0.1}>…</FadeIn>
- */
-export function FadeIn({ direction = "up", delay = 0.1, as = "div", children, ...props }: FadeInProps) {
+export function FadeIn({ direction = "up", delay = 0.1, as = "div", immediate = false, children, ...props }: FadeInProps) {
   const shouldReduceMotion = useReducedMotion()
   const isGrouped = useContext(FadeInGroupContext)
   const Tag = motion[as as keyof typeof motion] as typeof motion.div
@@ -71,10 +62,22 @@ export function FadeIn({ direction = "up", delay = 0.1, as = "div", children, ..
   }
 
   if (isGrouped) {
-    // Parent FadeInGroup owns initial/whileInView — we only supply variants + custom
-    // so that staggerChildren can orchestrate the sequence.
     return (
       <Tag variants={variants} custom={direction} {...props}>
+        {children}
+      </Tag>
+    )
+  }
+
+  if (immediate) {
+    const offset = directionOffset[direction]
+    return (
+      <Tag
+        initial={{ opacity: 0, ...offset }}
+        animate={{ opacity: 1, x: 0, y: 0 }}
+        transition={{ ...spring, delay }}
+        {...props}
+      >
         {children}
       </Tag>
     )
@@ -109,9 +112,11 @@ export interface FadeInGroupProps {
   /** Seconds between each child's animation start. Default: 0.1 */
   stagger?: number
   className?: string
+  /** Animate on mount instead of waiting for viewport intersection. Use for above-the-fold content. */
+  immediate?: boolean
 }
 
-export function FadeInGroup({ children, stagger = 0.1, className }: FadeInGroupProps) {
+export function FadeInGroup({ children, stagger = 0.1, className, immediate = false }: FadeInGroupProps) {
   const shouldReduceMotion = useReducedMotion()
 
   if (shouldReduceMotion) {
@@ -122,8 +127,10 @@ export function FadeInGroup({ children, stagger = 0.1, className }: FadeInGroupP
     <FadeInGroupContext.Provider value={true}>
       <motion.div
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-10% 0px" }}
+        {...(immediate
+          ? { animate: "visible" }
+          : { whileInView: "visible", viewport: { once: true, margin: "-10% 0px" } }
+        )}
         variants={{
           hidden: {},
           visible: { transition: { staggerChildren: stagger } },

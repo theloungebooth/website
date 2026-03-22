@@ -8,8 +8,8 @@ import LocationIcon from "~/components/icons/ui/location.svg?react"
 export function SectionHeroServices({ serviceType, heading, subheading, item, primaryLink, anchorId }: SectionHeroServices) {
   return (
     <Section id={anchorId ?? undefined}>
-      <FadeInGroup stagger={0.25} className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 md:gap-y-8 gap-x-16 items-center">
-        <FadeIn direction="up">
+      <FadeInGroup stagger={0.25} immediate className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 md:gap-y-8 gap-x-16 items-center">
+        <FadeIn direction="up" delay={0}>
           {serviceType && (
             <h1 className="mb-4 md:mb-5 type-base tracking-wide text-center text-primary-muted md:text-left mx-auto md:mx-0">
               {serviceType}
@@ -26,7 +26,7 @@ export function SectionHeroServices({ serviceType, heading, subheading, item, pr
             </Button>
           )}
         </FadeIn>
-        <FadeIn direction="up">
+        <FadeIn direction="up" delay={0}>
           <div className="aspect-4/5 w-full overflow-hidden bg-surface/65 rounded-custom">
             {item && (
               <MediaItem

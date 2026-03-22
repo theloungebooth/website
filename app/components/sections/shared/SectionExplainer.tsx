@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import type { SectionExplainer, ExplainerStep } from "~/types/sanity"
-import { FadeIn } from "~/components/ui/FadeIn"
+import { FadeIn, FadeInGroup } from "~/components/ui/FadeIn"
 import { Section } from "~/components/ui/Section"
 import { MediaItem } from "~/components/ui/MediaItem"
 import { cn } from "~/lib/cn"
@@ -11,30 +11,32 @@ function StepItem({ step, isMd, index }: { step: ExplainerStep; index: number; i
 
   return (
     <li id={`step-${step._key}`} className="flex w-full scroll-mt-24 flex-col gap-y-4 md:gap-y-6">
-      <div className="flex flex-col gap-y-2.5">
-        {!isMd && (
-          <h3 className="type-lg font-medium text-primary">
-            {index + 1}. {step.title}
-          </h3>
-        )}
-        <p className="type-base text-pretty md:pr-2.5">{step.description}</p>
-      </div>
-      {hasMedia && (
-        <div className="aspect-4/5 w-full overflow-hidden rounded-custom bg-surface/65">
-          <MediaItem
-            item={{
-              mediaType: step.mediaType ?? "image",
-              imageUrl: step.imageUrl,
-              videoUrl: step.videoUrl,
-              thumbnailUrl: step.thumbnailUrl,
-              alt: step.alt,
-            }}
-            sizes="(max-width: 768px) 90vw, 50vw"
-            widths={[400, 800, 1200]}
-            className="h-full w-full object-cover"
-          />
+      <FadeIn direction="up" className="flex flex-col gap-y-4 md:gap-y-6">
+        <div className="flex flex-col gap-y-2.5">
+          {!isMd && (
+            <h3 className="type-lg font-medium text-primary">
+              {index + 1}. {step.title}
+            </h3>
+          )}
+          <p className="type-base text-pretty md:pr-2.5">{step.description}</p>
         </div>
-      )}
+        {hasMedia && (
+          <div className="aspect-4/5 w-full overflow-hidden rounded-custom bg-surface/65">
+            <MediaItem
+              item={{
+                mediaType: step.mediaType ?? "image",
+                imageUrl: step.imageUrl,
+                videoUrl: step.videoUrl,
+                thumbnailUrl: step.thumbnailUrl,
+                alt: step.alt,
+              }}
+              sizes="(max-width: 768px) 90vw, 50vw"
+              widths={[400, 800, 1200]}
+              className="h-full w-full object-cover"
+            />
+          </div>
+        )}
+      </FadeIn>
     </li>
   )
 }
@@ -81,21 +83,28 @@ export function SectionExplainer({ heading, subheading, steps, anchorId }: Secti
         {/* Sticky left nav — desktop only */}
         <div className="hidden md:block w-full col-span-4">
           <nav className="sticky w-full top-[45%] flex flex-col gap-1">
-            {items.map((step, i) => (
-              <button
-                key={step._key}
-                onClick={() =>
-                  document.getElementById(`step-${step._key}`)?.scrollIntoView({ behavior: "smooth", block: "start" })
-                }
-                className={cn(
-                  "type-lg font-medium text-left cursor-pointer transition-colors ease-linear",
-                  activeKey === step._key ? "text-primary" : "text-primary-muted/65 hover:text-primary-muted",
-                )}
-              >
-                {step.title ?? `Step ${i + 1}`}
-              </button>
-            ))}
-            {subheading && <p className="type-base pt-20 text-primary-muted">{subheading}</p>}
+            <FadeInGroup stagger={0.08} className="flex flex-col gap-1">
+              {items.map((step, i) => (
+                <FadeIn key={step._key} direction="up">
+                  <button
+                    onClick={() =>
+                      document.getElementById(`step-${step._key}`)?.scrollIntoView({ behavior: "smooth", block: "start" })
+                    }
+                    className={cn(
+                      "type-lg font-medium text-left cursor-pointer transition-colors ease-linear",
+                      activeKey === step._key ? "text-primary" : "text-primary-muted/65 hover:text-primary-muted",
+                    )}
+                  >
+                    {step.title ?? `Step ${i + 1}`}
+                  </button>
+                </FadeIn>
+              ))}
+            </FadeInGroup>
+            {subheading && (
+              <FadeIn direction="up">
+                <p className="type-base pt-20 text-primary-muted">{subheading}</p>
+              </FadeIn>
+            )}
           </nav>
         </div>
 

@@ -8,9 +8,9 @@ import LocationIcon from "~/components/icons/ui/location.svg?react"
 export function SectionHeroHomepage({ heading, subheading, item, primaryLink, secondaryLink, anchorId }: SectionHeroHomepage) {
   return (
     <Section id={anchorId ?? undefined}>
-      <FadeInGroup stagger={0.25}>
-        <FadeIn direction="up">
-          <h1 className="pb-5 md:pb-7 type-base tracking-wide text-center text-primary-muted md:text-left mx-auto w-fit">
+      <FadeInGroup stagger={0.25} immediate>
+        <FadeIn direction="up" delay={0}>
+          <h1 className="pb-4 md:pb-7 type-base tracking-wide text-center text-primary-muted md:text-left mx-auto w-fit">
             Event photography & videography
           </h1>
           <h2 className="type-3xl md:type-4xl text-center text-balance max-w-175 mx-auto pb-4 md:pb-8">{heading}</h2>
@@ -29,7 +29,7 @@ export function SectionHeroHomepage({ heading, subheading, item, primaryLink, se
           </div>
         </FadeIn>
         {item && (
-          <FadeIn direction="up">
+          <FadeIn direction="up" delay={0}>
             <div className="mx-auto overflow-hidden rounded-custom md:max-w-lg">
               <div className="aspect-9/16 w-full bg-surface/65 rounded-custom">
                 <MediaItem

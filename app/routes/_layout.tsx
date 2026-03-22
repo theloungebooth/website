@@ -10,7 +10,7 @@ import { Footer } from "~/components/layout/Footer"
 import { seo } from "~/utils/seo"
 import { withFilename } from "~/lib/imgUrl"
 import { deepSmartify } from "~/utils/smartQuotes"
-import { useIsMd, useIsSm } from "~/hooks/useBreakpoint"
+import { useIsMd } from "~/hooks/useBreakpoint"
 import { cn } from "~/lib/cn"
 
 const fetchSettings = createServerFn({ method: "GET" }).handler(async () => {

@@ -33,6 +33,7 @@ const SECTIONS_FRAGMENT = /* groq */ `
     anchorId,
 
     // sectionHeroHomepage / sectionHeroContact
+    eyebrow,
     heading,
     subheading,
     serviceType,

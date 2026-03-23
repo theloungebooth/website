@@ -3,7 +3,6 @@ import { Button } from "~/components/ui/Button"
 import { MediaItem } from "~/components/ui/MediaItem"
 import { Section } from "~/components/ui/Section"
 import { FadeIn, FadeInGroup } from "~/components/ui/FadeIn"
-import LocationIcon from "~/components/icons/ui/location.svg?react"
 
 export function SectionHeroServices({ serviceType, heading, subheading, item, primaryLink, anchorId }: SectionHeroServices) {
   return (

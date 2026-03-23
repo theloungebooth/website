@@ -60,6 +60,7 @@ export type SectionGalleryItem = {
 export type SectionHeroHomepage = {
   _type: 'sectionHeroHomepage'
   _key: string
+  eyebrow?: string | null
   heading: string
   subheading?: string | null
   item?: SectionGalleryItem | null
@@ -175,6 +176,7 @@ export type SectionHeroContact = {
 export type SectionHeroAbout = {
   _type: 'sectionHeroAbout'
   _key: string
+  eyebrow?: string | null
   heading: string
   subheading?: string | null
   primaryLink?: SanityLink | null

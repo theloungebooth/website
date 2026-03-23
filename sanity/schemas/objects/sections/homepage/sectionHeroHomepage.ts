@@ -12,6 +12,11 @@ export const sectionHeroHomepage = {
   ],
   fields: [
     {
+      name: 'eyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+    },
+    {
       name: 'heading',
       title: 'Heading',
       type: 'string',

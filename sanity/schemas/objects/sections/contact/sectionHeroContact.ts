@@ -136,6 +136,19 @@ export const sectionHeroContact = {
               of: [{ type: 'string' }],
               hidden: ({ parent }: any) => parent?.fieldType !== 'select',
             },
+            {
+              name: 'width',
+              title: 'Width',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Full', value: 'full' },
+                  { title: 'Half', value: 'half' },
+                ],
+                layout: 'radio',
+              },
+              initialValue: 'full',
+            },
           ],
           preview: {
             select: { label: 'label', fieldType: 'fieldType' },

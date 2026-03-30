@@ -48,6 +48,7 @@ const SECTIONS_FRAGMENT = /* groq */ `
       placeholder,
       required,
       options,
+      width,
     },
 
     // sectionSocialHomepage

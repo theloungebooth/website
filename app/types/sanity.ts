@@ -161,6 +161,7 @@ export type FormField = {
   placeholder?: string | null
   required?: boolean | null
   options?: string[] | null
+  width?: 'full' | 'half' | null
 }
 
 export type SectionHeroContact = {

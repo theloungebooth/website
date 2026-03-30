@@ -1,4 +1,5 @@
 import { useState } from "react"
+import ChevronDownIcon from "../../icons/ui/chevron-down.svg?react"
 import type { SectionHeroContact, FormField } from "~/types/sanity"
 import { Button } from "../../ui/Button"
 import { MediaItem } from "~/components/ui/MediaItem"
@@ -19,23 +20,28 @@ function FormFieldInput({ field, value, onChange }: { field: FormField; value: s
         <label htmlFor={name} className="sr-only">
           {field.label}
         </label>
-        <select
-          id={name}
-          name={name}
-          required={field.required ?? false}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className={inputCls}
-        >
-          <option value="" disabled>
-            {placeholder}
-          </option>
-          {field.options?.map((opt) => (
-            <option key={opt} value={opt}>
-              {opt}
+        <div className="relative">
+          <select
+            id={name}
+            name={name}
+            required={field.required ?? false}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            className={cn(inputCls, "appearance-none pr-10", !value && "text-primary-muted")}
+          >
+            <option value="" disabled>
+              {placeholder}
             </option>
-          ))}
-        </select>
+            {field.options?.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-3.5 md:right-4 flex items-center">
+            <ChevronDownIcon className="w-4 h-4 text-primary-muted" />
+          </div>
+        </div>
       </>
     )
   }
@@ -51,10 +57,10 @@ function FormFieldInput({ field, value, onChange }: { field: FormField; value: s
           name={name}
           placeholder={placeholder}
           required={field.required ?? false}
-          rows={4}
+          rows={3}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={cn(inputCls, "resize-none")}
+          className={cn(inputCls, "resize-none block")}
         />
       </>
     )
@@ -118,19 +124,22 @@ function ContactForm({ formFields }: Pick<SectionHeroContact, "formFields">) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-y-3 md:gap-y-4">
+    <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-3 md:gap-3.5">
       {formFields?.map((field) => (
-        <FormFieldInput
-          key={field._key}
-          field={field}
-          value={values[field.label] ?? ""}
-          onChange={(v) => setValue(field.label, v)}
-        />
+        <div key={field._key} className={field.width === "half" ? "col-span-2 md:col-span-1" : "col-span-2"}>
+          <FormFieldInput field={field} value={values[field.label] ?? ""} onChange={(v) => setValue(field.label, v)} />
+        </div>
       ))}
 
-      {status === "error" && <p className="type-sm text-red-500">{errorMessage}</p>}
+      {status === "error" && <p className="col-span-2 type-sm text-red-500">{errorMessage}</p>}
 
-      <Button type="submit" variant="primary" arrow disabled={status === "loading"} className="mt-1 md:mt-2 w-fit text-center">
+      <Button
+        type="submit"
+        variant="primary"
+        arrow
+        disabled={status === "loading"}
+        className="col-span-2 mt-1 md:mt-2 w-fit text-center"
+      >
         {status === "loading" ? "Sending…" : "Send enquiry"}
       </Button>
     </form>

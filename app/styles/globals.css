@@ -94,6 +94,24 @@
     border-color: var(--color-surface);
   }
 
+  textarea {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-muted) transparent;
+  }
+
+  textarea::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  textarea::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary-muted);
+    border-radius: 9999px;
+  }
+
   svg {
     @apply w-full h-full;
   }
